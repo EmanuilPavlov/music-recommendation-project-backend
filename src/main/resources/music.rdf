@@ -1,0 +1,2392 @@
+@prefix : <http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#> .
+
+<http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#affectsState
+:affectsState rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :Song ;
+              rdfs:range :State .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#containsSong
+:containsSong rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :Playlist ;
+              rdfs:range :Song .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasEffect
+:hasEffect rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:domain :Song ;
+           rdfs:range :Effect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasGenre
+:hasGenre rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          rdfs:domain :Emotion ,
+                      :Song ;
+          rdfs:range :SongAccordingToGenre .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasMedicalCondition
+:hasMedicalCondition rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf owl:topObjectProperty ;
+                     rdfs:domain :UserProfile ;
+                     rdfs:range :MedicalCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasMentalState
+:hasMentalState rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf owl:topObjectProperty ;
+                rdfs:domain :UserProfile ;
+                rdfs:range :MentalState .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasMood
+:hasMood rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdfs:domain :Song ;
+         rdfs:range :Emotion .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasPhysicalState
+:hasPhysicalState rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf owl:topObjectProperty ;
+                  rdf:type owl:FunctionalProperty ;
+                  rdfs:domain :UserProfile ;
+                  rdfs:range :PhysicalState .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasPlaylist
+:hasPlaylist rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain :UserProfile ;
+             rdfs:range :Playlist .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasSymptom
+:hasSymptom rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdfs:domain :MedicalCondition ;
+            rdfs:range :Symptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasTempo
+:hasTempo rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          rdf:type owl:FunctionalProperty ;
+          rdfs:domain :Song ;
+          rdfs:range :SongAccordingToTempo .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#performedBy
+:performedBy rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             owl:inverseOf :performes ;
+             rdfs:domain :Song ;
+             rdfs:range :Artist .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#performes
+:performes rdf:type owl:ObjectProperty ;
+           rdfs:domain :Artist ;
+           rdfs:range :Song .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#playlistActivity
+:playlistActivity rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf owl:topObjectProperty ;
+                  rdfs:domain :Playlist ;
+                  rdfs:range :Activity .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#playlistMood
+:playlistMood rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :Playlist ;
+              rdfs:range :Emotion .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#prefersGenre
+:prefersGenre rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :UserProfile ;
+              rdfs:range :SongAccordingToGenre .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#prefersTempo
+:prefersTempo rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :UserProfile ;
+              rdfs:range :SongAccordingToTempo .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#recommendedForState
+:recommendedForState rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf owl:topObjectProperty ;
+                     rdfs:domain :Song ;
+                     rdfs:range :State .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasBPM
+:hasBPM rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf owl:topDataProperty ;
+        rdf:type owl:FunctionalProperty ;
+        rdfs:domain :Song ;
+        rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasDuration
+:hasDuration rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdf:type owl:FunctionalProperty ;
+             rdfs:domain :Song ;
+             rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasHz
+:hasHz rdf:type owl:DatatypeProperty ,
+                owl:FunctionalProperty ;
+       rdfs:domain :Song ;
+       rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasPopularity
+:hasPopularity rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdf:type owl:FunctionalProperty ;
+               rdfs:domain :Song ;
+               rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasTitle
+:hasTitle rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf owl:topDataProperty ;
+          rdf:type owl:FunctionalProperty ;
+          rdfs:domain :Song ;
+          rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#hasYear
+:hasYear rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf owl:topDataProperty ;
+         rdf:type owl:FunctionalProperty ;
+         rdfs:domain :Song ;
+         rdfs:range xsd:int .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ADHD
+:ADHD rdf:type owl:Class ;
+      owl:equivalentClass [ owl:intersectionOf ( :MedicalCondition
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasSymptom ;
+                                                   owl:someValuesFrom :BrainFog
+                                                 ]
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasSymptom ;
+                                                   owl:someValuesFrom :Distractibility
+                                                 ]
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasSymptom ;
+                                                   owl:someValuesFrom :PoorConcentration
+                                                 ]
+                                               ) ;
+                            rdf:type owl:Class
+                          ] ;
+      rdfs:subClassOf :MedicalCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Activity
+:Activity rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Afrobeat
+:Afrobeat rdf:type owl:Class ;
+          rdfs:subClassOf :WorldMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#AlternativeRock
+:AlternativeRock rdf:type owl:Class ;
+                 rdfs:subClassOf :RockMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Ambient
+:Ambient rdf:type owl:Class ;
+         rdfs:subClassOf :ElectronicMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Angry
+:Angry rdf:type owl:Class ;
+       owl:equivalentClass [ owl:intersectionOf ( :Emotion
+                                                  [ rdf:type owl:Class ;
+                                                    owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasGenre ;
+                                                                    owl:someValuesFrom :Metal
+                                                                  ]
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasGenre ;
+                                                                    owl:someValuesFrom :RockMusic
+                                                                  ]
+                                                                )
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :hasBPM ;
+                                                    owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                         owl:onDatatype xsd:int ;
+                                                                         owl:withRestrictions ( [ xsd:minInclusive "150"^^xsd:int
+                                                                                                ]
+                                                                                                [ xsd:maxExclusive "180"^^xsd:int
+                                                                                                ]
+                                                                                              )
+                                                                       ]
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] ;
+       rdfs:subClassOf :Emotion .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Anxiety
+:Anxiety rdf:type owl:Class ;
+         owl:equivalentClass [ owl:intersectionOf ( :MedicalCondition
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasSymptom ;
+                                                      owl:someValuesFrom :AnxietySymptom
+                                                    ]
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasSymptom ;
+                                                      owl:someValuesFrom :Restlessness
+                                                    ]
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasSymptom ;
+                                                      owl:someValuesFrom :Tension
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] ;
+         rdfs:subClassOf :MedicalCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#AnxietyReductionEffect
+:AnxietyReductionEffect rdf:type owl:Class ;
+                        owl:equivalentClass [ owl:intersectionOf ( :AnxietyReductionEffect
+                                                                   [ rdf:type owl:Class ;
+                                                                     owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty :hasGenre ;
+                                                                                     owl:someValuesFrom :Ambient
+                                                                                   ]
+                                                                                   [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty :hasGenre ;
+                                                                                     owl:someValuesFrom :Chillout
+                                                                                   ]
+                                                                                   [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty :hasGenre ;
+                                                                                     owl:someValuesFrom :ClassicalMusic
+                                                                                   ]
+                                                                                   [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty :hasGenre ;
+                                                                                     owl:someValuesFrom :Lo-fi
+                                                                                   ]
+                                                                                 )
+                                                                   ]
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :hasBPM ;
+                                                                     owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                          owl:onDatatype xsd:int ;
+                                                                                          owl:withRestrictions ( [ xsd:minInclusive "60"^^xsd:int
+                                                                                                                 ]
+                                                                                                                 [ xsd:maxExclusive "80"^^xsd:int
+                                                                                                                 ]
+                                                                                                               )
+                                                                                        ]
+                                                                   ]
+                                                                 ) ;
+                                              rdf:type owl:Class
+                                            ] ;
+                        rdfs:subClassOf :TherapeuticEffect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#AnxietyReliefSong
+:AnxietyReliefSong rdf:type owl:Class ;
+                   owl:equivalentClass [ owl:intersectionOf ( :AnxietyReliefSong
+                                                              [ rdf:type owl:Class ;
+                                                                owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty :hasEffect ;
+                                                                                owl:someValuesFrom :AnxietyReductionEffect
+                                                                              ]
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty :hasEffect ;
+                                                                                owl:someValuesFrom :RelaxationEffect
+                                                                              ]
+                                                                            )
+                                                              ]
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty :hasMedicalCondition ;
+                                                                owl:someValuesFrom :Anxiety
+                                                              ]
+                                                            ) ;
+                                         rdf:type owl:Class
+                                       ] ;
+                   rdfs:subClassOf :SongAccordingToCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#AnxietySymptom
+:AnxietySymptom rdf:type owl:Class ;
+                rdfs:subClassOf :EmotionalSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Apathy
+:Apathy rdf:type owl:Class ;
+        rdfs:subClassOf :EmotionalSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Artist
+:Artist rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Bachata
+:Bachata rdf:type owl:Class ;
+         rdfs:subClassOf :LatinMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#BalkanMusic
+:BalkanMusic rdf:type owl:Class ;
+             rdfs:subClassOf :WorldMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Band
+:Band rdf:type owl:Class ;
+      rdfs:subClassOf :Artist .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Baroque
+:Baroque rdf:type owl:Class ;
+         rdfs:subClassOf :ClassicalMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Bebop
+:Bebop rdf:type owl:Class ;
+       rdfs:subClassOf :Jazz ;
+       owl:disjointWith :Swing .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#BlackMetal
+:BlackMetal rdf:type owl:Class ;
+            rdfs:subClassOf :Metal .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Blues
+:Blues rdf:type owl:Class ;
+       rdfs:subClassOf :SongAccordingToGenre .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#BrainFog
+:BrainFog rdf:type owl:Class ;
+          rdfs:subClassOf :CognitiveSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Burnout
+:Burnout rdf:type owl:Class ;
+         owl:equivalentClass [ owl:intersectionOf ( :MedicalCondition
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasSymptom ;
+                                                      owl:someValuesFrom :BrainFog
+                                                    ]
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasSymptom ;
+                                                      owl:someValuesFrom :BurnoutFeeling
+                                                    ]
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasSymptom ;
+                                                      owl:someValuesFrom :Exhaustion
+                                                    ]
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasSymptom ;
+                                                      owl:someValuesFrom :LowEnergy
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] ;
+         rdfs:subClassOf :MedicalCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#BurnoutFeeling
+:BurnoutFeeling rdf:type owl:Class ;
+                rdfs:subClassOf :EnergySymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Calm
+:Calm rdf:type owl:Class ;
+      rdfs:subClassOf :RelaxationState ;
+      owl:disjointWith :Stressed .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ChicagoBlues
+:ChicagoBlues rdf:type owl:Class ;
+              rdfs:subClassOf :Blues .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Chillout
+:Chillout rdf:type owl:Class ;
+          rdfs:subClassOf :Hybrid .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ChronicPain
+:ChronicPain rdf:type owl:Class ;
+             owl:equivalentClass [ owl:intersectionOf ( :MedicalCondition
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :hasSymptom ;
+                                                          owl:someValuesFrom :AnxietySymptom
+                                                        ]
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :hasSymptom ;
+                                                          owl:someValuesFrom :Depression
+                                                        ]
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :hasSymptom ;
+                                                          owl:someValuesFrom :Headache
+                                                        ]
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :hasSymptom ;
+                                                          owl:someValuesFrom :MuscleFatigue
+                                                        ]
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :hasSymptom ;
+                                                          owl:someValuesFrom :Tension
+                                                        ]
+                                                      ) ;
+                                   rdf:type owl:Class
+                                 ] ;
+             rdfs:subClassOf :MedicalCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ChronicPainReliefSong
+:ChronicPainReliefSong rdf:type owl:Class ;
+                       owl:equivalentClass [ owl:intersectionOf ( :ChronicPainReliefSong
+                                                                  [ rdf:type owl:Class ;
+                                                                    owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasEffect ;
+                                                                                    owl:someValuesFrom :RelaxationEffect
+                                                                                  ]
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasEffect ;
+                                                                                    owl:someValuesFrom :StressReductionEffect
+                                                                                  ]
+                                                                                )
+                                                                  ]
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasMedicalCondition ;
+                                                                    owl:someValuesFrom :ChronicPain
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ] ;
+                       rdfs:subClassOf :SongAccordingToCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ClassicalMusic
+:ClassicalMusic rdf:type owl:Class ;
+                rdfs:subClassOf :SongAccordingToGenre .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Coding
+:Coding rdf:type owl:Class ;
+        rdfs:subClassOf :Activity .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#CognitiveEffect
+:CognitiveEffect rdf:type owl:Class ;
+                 rdfs:subClassOf :Effect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#CognitiveState
+:CognitiveState rdf:type owl:Class ;
+                rdfs:subClassOf :MentalState .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#CognitiveSymptom
+:CognitiveSymptom rdf:type owl:Class ;
+                  rdfs:subClassOf :Symptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ConcentrationBoost
+:ConcentrationBoost rdf:type owl:Class ;
+                    owl:equivalentClass [ owl:intersectionOf ( :ConcentrationBoost
+                                                               [ rdf:type owl:Class ;
+                                                                 owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                 owl:onProperty :hasGenre ;
+                                                                                 owl:someValuesFrom :Ambient
+                                                                               ]
+                                                                               [ rdf:type owl:Restriction ;
+                                                                                 owl:onProperty :hasGenre ;
+                                                                                 owl:someValuesFrom :ClassicalMusic
+                                                                               ]
+                                                                               [ rdf:type owl:Restriction ;
+                                                                                 owl:onProperty :hasGenre ;
+                                                                                 owl:someValuesFrom :Jazz
+                                                                               ]
+                                                                               [ rdf:type owl:Restriction ;
+                                                                                 owl:onProperty :hasGenre ;
+                                                                                 owl:someValuesFrom :Lo-fi
+                                                                               ]
+                                                                             )
+                                                               ]
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :hasBPM ;
+                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                      owl:onDatatype xsd:int ;
+                                                                                      owl:withRestrictions ( [ xsd:minInclusive "60"^^xsd:int
+                                                                                                             ]
+                                                                                                             [ xsd:maxExclusive "90"^^xsd:int
+                                                                                                             ]
+                                                                                                           )
+                                                                                    ]
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                    rdfs:subClassOf :CognitiveEffect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Country
+:Country rdf:type owl:Class ;
+         rdfs:subClassOf :FolkMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#CreativityEnhancement
+:CreativityEnhancement rdf:type owl:Class ;
+                       owl:equivalentClass [ owl:intersectionOf ( :CreativityEnhancement
+                                                                  [ rdf:type owl:Class ;
+                                                                    owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasGenre ;
+                                                                                    owl:someValuesFrom :Ambient
+                                                                                  ]
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasGenre ;
+                                                                                    owl:someValuesFrom :ClassicalMusic
+                                                                                  ]
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasGenre ;
+                                                                                    owl:someValuesFrom :Jazz
+                                                                                  ]
+                                                                                )
+                                                                  ]
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasBPM ;
+                                                                    owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                         owl:onDatatype xsd:int ;
+                                                                                         owl:withRestrictions ( [ xsd:minInclusive "80"^^xsd:int
+                                                                                                                ]
+                                                                                                                [ xsd:maxExclusive "120"^^xsd:int
+                                                                                                                ]
+                                                                                                              )
+                                                                                       ]
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ] ;
+                       rdfs:subClassOf :CognitiveEffect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#DJ
+:DJ rdf:type owl:Class ;
+    rdfs:subClassOf :Artist .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#DancePop
+:DancePop rdf:type owl:Class ;
+          rdfs:subClassOf :PopularMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#DeathMetal
+:DeathMetal rdf:type owl:Class ;
+            rdfs:subClassOf :Metal .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#DeltaBlues
+:DeltaBlues rdf:type owl:Class ;
+            rdfs:subClassOf :Blues .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Dementia
+:Dementia rdf:type owl:Class ;
+          owl:equivalentClass [ owl:intersectionOf ( :MedicalCondition
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasSymptom ;
+                                                       owl:someValuesFrom :AnxietySymptom
+                                                     ]
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasSymptom ;
+                                                       owl:someValuesFrom :Apathy
+                                                     ]
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasSymptom ;
+                                                       owl:someValuesFrom :MemoryProblems
+                                                     ]
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasSymptom ;
+                                                       owl:someValuesFrom :MentalFatigue
+                                                     ]
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasSymptom ;
+                                                       owl:someValuesFrom :PoorConcentration
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] ;
+          rdfs:subClassOf :MedicalCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#DementiaCareSong
+:DementiaCareSong rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( :DementiaCareSong
+                                                             [ rdf:type owl:Class ;
+                                                               owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasEffect ;
+                                                                               owl:someValuesFrom :MemorySupport
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasEffect ;
+                                                                               owl:someValuesFrom :MoodImprovementEffect
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasEffect ;
+                                                                               owl:someValuesFrom :RelaxationEffect
+                                                                             ]
+                                                                           )
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty :hasMedicalCondition ;
+                                                               owl:someValuesFrom :Dementia
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf :SongAccordingToCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Depression
+:Depression rdf:type owl:Class ;
+            owl:equivalentClass [ owl:intersectionOf ( :MedicalCondition
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty :hasSymptom ;
+                                                         owl:someValuesFrom :Apathy
+                                                       ]
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty :hasSymptom ;
+                                                         owl:someValuesFrom :EmotionalOverload
+                                                       ]
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty :hasSymptom ;
+                                                         owl:someValuesFrom :Exhaustion
+                                                       ]
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty :hasSymptom ;
+                                                         owl:someValuesFrom :LackOfMotivation
+                                                       ]
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty :hasSymptom ;
+                                                         owl:someValuesFrom :LowEnergy
+                                                       ]
+                                                     ) ;
+                                  rdf:type owl:Class
+                                ] ;
+            rdfs:subClassOf :MedicalCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#DepressionFriendlySong
+:DepressionFriendlySong rdf:type owl:Class ;
+                        owl:equivalentClass [ owl:intersectionOf ( :DepressionFriendlySong
+                                                                   [ rdf:type owl:Class ;
+                                                                     owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty :hasEffect ;
+                                                                                     owl:someValuesFrom :EnergyBoost
+                                                                                   ]
+                                                                                   [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty :hasEffect ;
+                                                                                     owl:someValuesFrom :MoodImprovementEffect
+                                                                                   ]
+                                                                                   [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty :hasEffect ;
+                                                                                     owl:someValuesFrom :RelaxationEffect
+                                                                                   ]
+                                                                                 )
+                                                                   ]
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :hasMedicalCondition ;
+                                                                     owl:someValuesFrom :Depression
+                                                                   ]
+                                                                 ) ;
+                                              rdf:type owl:Class
+                                            ] ;
+                        rdfs:subClassOf :SongAccordingToCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#DifficultyFallingAsleep
+:DifficultyFallingAsleep rdf:type owl:Class ;
+                         rdfs:subClassOf :SleepSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Distracted
+:Distracted rdf:type owl:Class ;
+            rdfs:subClassOf :CognitiveState ;
+            owl:disjointWith :Focused .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Distractibility
+:Distractibility rdf:type owl:Class ;
+                 rdfs:subClassOf :CognitiveSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Driving
+:Driving rdf:type owl:Class ;
+         rdfs:subClassOf :Activity .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Dubste
+:Dubste rdf:type owl:Class ;
+        rdfs:subClassOf :ElectronicMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Dyslexia
+:Dyslexia rdf:type owl:Class ;
+          owl:equivalentClass [ owl:intersectionOf ( :Dyslexia
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasSymptom ;
+                                                       owl:someValuesFrom :BrainFog
+                                                     ]
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasSymptom ;
+                                                       owl:someValuesFrom :Distractibility
+                                                     ]
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasSymptom ;
+                                                       owl:someValuesFrom :ReadingDifficulty
+                                                     ]
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasSymptom ;
+                                                       owl:someValuesFrom :VisualProcessingIssue
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] ;
+          rdfs:subClassOf :MedicalCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Effect
+:Effect rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Electro
+:Electro rdf:type owl:Class ;
+         rdfs:subClassOf :ElectronicMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ElectroPop
+:ElectroPop rdf:type owl:Class ;
+            rdfs:subClassOf :PopularMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ElectronicMusic
+:ElectronicMusic rdf:type owl:Class ;
+                 rdfs:subClassOf :SongAccordingToGenre .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Emotion
+:Emotion rdf:type owl:Class ;
+         rdfs:subClassOf :MentalState .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#EmotionalOverload
+:EmotionalOverload rdf:type owl:Class ;
+                   rdfs:subClassOf :EmotionalSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#EmotionalSymptom
+:EmotionalSymptom rdf:type owl:Class ;
+                  rdfs:subClassOf :Symptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Energetic
+:Energetic rdf:type owl:Class ;
+           rdfs:subClassOf :EnergyState ;
+           owl:disjointWith :Exhausted .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#EnergyBoost
+:EnergyBoost rdf:type owl:Class ;
+             owl:equivalentClass [ owl:intersectionOf ( :EnergyBoost
+                                                        [ rdf:type owl:Class ;
+                                                          owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :hasGenre ;
+                                                                          owl:someValuesFrom :ElectronicMusic
+                                                                        ]
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :hasGenre ;
+                                                                          owl:someValuesFrom :Hip-Hop
+                                                                        ]
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :hasGenre ;
+                                                                          owl:someValuesFrom :Metal
+                                                                        ]
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :hasGenre ;
+                                                                          owl:someValuesFrom :RockMusic
+                                                                        ]
+                                                                      )
+                                                        ]
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :hasBPM ;
+                                                          owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                               owl:onDatatype xsd:int ;
+                                                                               owl:withRestrictions ( [ xsd:minInclusive "130"^^xsd:int
+                                                                                                      ]
+                                                                                                      [ xsd:maxExclusive "180"^^xsd:int
+                                                                                                      ]
+                                                                                                    )
+                                                                             ]
+                                                        ]
+                                                      ) ;
+                                   rdf:type owl:Class
+                                 ] ;
+             rdfs:subClassOf :PhysicalEffect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#EnergyState
+:EnergyState rdf:type owl:Class ;
+             rdfs:subClassOf :MentalState .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#EnergySymptom
+:EnergySymptom rdf:type owl:Class ;
+               rdfs:subClassOf :Symptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Exhausted
+:Exhausted rdf:type owl:Class ;
+           rdfs:subClassOf :EnergyState .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Exhaustion
+:Exhaustion rdf:type owl:Class ;
+            rdfs:subClassOf :EnergySymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#FastTempoSong
+:FastTempoSong rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( :FastTempoSong
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasBPM ;
+                                                            owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                 owl:onDatatype xsd:int ;
+                                                                                 owl:withRestrictions ( [ xsd:minInclusive "120"^^xsd:int
+                                                                                                        ]
+                                                                                                        [ xsd:maxExclusive "200"^^xsd:int
+                                                                                                        ]
+                                                                                                      )
+                                                                               ]
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+               rdfs:subClassOf :SongAccordingToTempo .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#FatigueReduction
+:FatigueReduction rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( :FatigueReduction
+                                                             [ rdf:type owl:Class ;
+                                                               owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasGenre ;
+                                                                               owl:someValuesFrom :Ambient
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasGenre ;
+                                                                               owl:someValuesFrom :Chillout
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasGenre ;
+                                                                               owl:someValuesFrom :ClassicalMusic
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasGenre ;
+                                                                               owl:someValuesFrom :Lo-fi
+                                                                             ]
+                                                                           )
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty :hasBPM ;
+                                                               owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                    owl:onDatatype xsd:int ;
+                                                                                    owl:withRestrictions ( [ xsd:minInclusive "55"^^xsd:int
+                                                                                                           ]
+                                                                                                           [ xsd:maxExclusive "80"^^xsd:int
+                                                                                                           ]
+                                                                                                         )
+                                                                                  ]
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf :PhysicalEffect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#FocusEnhancementEffect
+:FocusEnhancementEffect rdf:type owl:Class ;
+                        owl:equivalentClass [ owl:intersectionOf ( :FocusEnhancementEffect
+                                                                   [ rdf:type owl:Class ;
+                                                                     owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty :hasGenre ;
+                                                                                     owl:someValuesFrom :Ambient
+                                                                                   ]
+                                                                                   [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty :hasGenre ;
+                                                                                     owl:someValuesFrom :ClassicalMusic
+                                                                                   ]
+                                                                                   [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty :hasGenre ;
+                                                                                     owl:someValuesFrom :Jazz
+                                                                                   ]
+                                                                                   [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty :hasGenre ;
+                                                                                     owl:someValuesFrom :Lo-fi
+                                                                                   ]
+                                                                                 )
+                                                                   ]
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :hasBPM ;
+                                                                     owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                          owl:onDatatype xsd:int ;
+                                                                                          owl:withRestrictions ( [ xsd:minInclusive "60"^^xsd:int
+                                                                                                                 ]
+                                                                                                                 [ xsd:maxExclusive "90"^^xsd:int
+                                                                                                                 ]
+                                                                                                               )
+                                                                                        ]
+                                                                   ]
+                                                                 ) ;
+                                              rdf:type owl:Class
+                                            ] ;
+                        rdfs:subClassOf :TherapeuticEffect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#FocusEnhancementSong
+:FocusEnhancementSong rdf:type owl:Class ;
+                      owl:equivalentClass [ owl:intersectionOf ( :FocusEnhancementSong
+                                                                 [ rdf:type owl:Class ;
+                                                                   owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                   owl:onProperty :hasEffect ;
+                                                                                   owl:someValuesFrom :ConcentrationBoost
+                                                                                 ]
+                                                                                 [ rdf:type owl:Restriction ;
+                                                                                   owl:onProperty :hasEffect ;
+                                                                                   owl:someValuesFrom :FocusEnhancementEffect
+                                                                                 ]
+                                                                               )
+                                                                 ]
+                                                                 [ rdf:type owl:Class ;
+                                                                   owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                   owl:onProperty :hasMedicalCondition ;
+                                                                                   owl:someValuesFrom :ADHD
+                                                                                 ]
+                                                                                 [ rdf:type owl:Restriction ;
+                                                                                   owl:onProperty :hasMedicalCondition ;
+                                                                                   owl:someValuesFrom :Dyslexia
+                                                                                 ]
+                                                                               )
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ;
+                      rdfs:subClassOf :SongAccordingToCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Focused
+:Focused rdf:type owl:Class ;
+         rdfs:subClassOf :CognitiveState .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#FolkMusic
+:FolkMusic rdf:type owl:Class ;
+           rdfs:subClassOf :SongAccordingToGenre .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Gaming
+:Gaming rdf:type owl:Class ;
+        rdfs:subClassOf :Activity .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Happy
+:Happy rdf:type owl:Class ;
+       owl:equivalentClass [ owl:intersectionOf ( :Emotion
+                                                  [ rdf:type owl:Class ;
+                                                    owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasGenre ;
+                                                                    owl:someValuesFrom :ElectronicMusic
+                                                                  ]
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasGenre ;
+                                                                    owl:someValuesFrom :Hip-Hop
+                                                                  ]
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasGenre ;
+                                                                    owl:someValuesFrom :PopularMusic
+                                                                  ]
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasGenre ;
+                                                                    owl:someValuesFrom :Soundtrack
+                                                                  ]
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasGenre ;
+                                                                    owl:someValuesFrom :WorldMusic
+                                                                  ]
+                                                                )
+                                                  ]
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :hasBPM ;
+                                                    owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                         owl:onDatatype xsd:int ;
+                                                                         owl:withRestrictions ( [ xsd:minInclusive "120"^^xsd:int
+                                                                                                ]
+                                                                                                [ xsd:maxExclusive "150"^^xsd:int
+                                                                                                ]
+                                                                                              )
+                                                                       ]
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] ;
+       rdfs:subClassOf :Emotion .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#HardRock
+:HardRock rdf:type owl:Class ;
+          rdfs:subClassOf :RockMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Headache
+:Headache rdf:type owl:Class ;
+          rdfs:subClassOf :PhysicalSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#HeavyMetal
+:HeavyMetal rdf:type owl:Class ;
+            rdfs:subClassOf :Metal .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#HighPerformanceSong
+:HighPerformanceSong rdf:type owl:Class ;
+                     owl:equivalentClass [ owl:intersectionOf ( :HighPerformanceSong
+                                                                [ rdf:type owl:Class ;
+                                                                  owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty :hasEffect ;
+                                                                                  owl:someValuesFrom :EnergyBoost
+                                                                                ]
+                                                                                [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty :hasEffect ;
+                                                                                  owl:someValuesFrom :MoodImprovementEffect
+                                                                                ]
+                                                                              )
+                                                                ]
+                                                                [ rdf:type owl:Class ;
+                                                                  owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty :hasMedicalCondition ;
+                                                                                  owl:someValuesFrom :Burnout
+                                                                                ]
+                                                                                [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty :hasMedicalCondition ;
+                                                                                  owl:someValuesFrom :SevereFatigue
+                                                                                ]
+                                                                              )
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ;
+                     rdfs:subClassOf :SongAccordingToCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Hip-Hop
+:Hip-Hop rdf:type owl:Class ;
+         rdfs:subClassOf :SongAccordingToGenre .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#House
+:House rdf:type owl:Class ;
+       rdfs:subClassOf :ElectronicMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Hybrid
+:Hybrid rdf:type owl:Class ;
+        rdfs:subClassOf :SongAccordingToGenre .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#IndieRock
+:IndieRock rdf:type owl:Class ;
+           rdfs:subClassOf :RockMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Insomnia
+:Insomnia rdf:type owl:Class ;
+          owl:equivalentClass [ owl:intersectionOf ( :MedicalCondition
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasSymptom ;
+                                                       owl:someValuesFrom :DifficultyFallingAsleep
+                                                     ]
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasSymptom ;
+                                                       owl:someValuesFrom :Insomnia
+                                                     ]
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasSymptom ;
+                                                       owl:someValuesFrom :Irritability
+                                                     ]
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasSymptom ;
+                                                       owl:someValuesFrom :LowEnergy
+                                                     ]
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasSymptom ;
+                                                       owl:someValuesFrom :PoorSleepQuality
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] ;
+          rdfs:subClassOf :MedicalCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Irritability
+:Irritability rdf:type owl:Class ;
+              rdfs:subClassOf :EmotionalSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#J-pop
+:J-pop rdf:type owl:Class ;
+       rdfs:subClassOf :PopularMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Jazz
+:Jazz rdf:type owl:Class ;
+      rdfs:subClassOf :SongAccordingToGenre .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#K-pop
+:K-pop rdf:type owl:Class ;
+       rdfs:subClassOf :PopularMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#LackOfMotivation
+:LackOfMotivation rdf:type owl:Class ;
+                  rdfs:subClassOf :EmotionalSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#LatinMusic
+:LatinMusic rdf:type owl:Class ;
+            rdfs:subClassOf :WorldMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Lo-fi
+:Lo-fi rdf:type owl:Class ;
+       rdfs:subClassOf :Hybrid .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Lo-fiHip-hop
+:Lo-fiHip-hop rdf:type owl:Class ;
+              rdfs:subClassOf :Hip-Hop .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#LowEnergy
+:LowEnergy rdf:type owl:Class ;
+           rdfs:subClassOf :EnergySymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#MedicalCondition
+:MedicalCondition rdf:type owl:Class ;
+                  rdfs:subClassOf :State .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Meditation
+:Meditation rdf:type owl:Class ;
+            rdfs:subClassOf :Activity .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#MeditationSong
+:MeditationSong rdf:type owl:Class ;
+                owl:equivalentClass [ owl:intersectionOf ( :MeditationSong
+                                                           [ rdf:type owl:Class ;
+                                                             owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty :hasEffect ;
+                                                                             owl:someValuesFrom :AnxietyReductionEffect
+                                                                           ]
+                                                                           [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty :hasEffect ;
+                                                                             owl:someValuesFrom :RelaxationEffect
+                                                                           ]
+                                                                           [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty :hasEffect ;
+                                                                             owl:someValuesFrom :StressReductionEffect
+                                                                           ]
+                                                                         )
+                                                           ]
+                                                           [ rdf:type owl:Class ;
+                                                             owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty :hasMedicalCondition ;
+                                                                             owl:someValuesFrom :Anxiety
+                                                                           ]
+                                                                           [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty :hasMedicalCondition ;
+                                                                             owl:someValuesFrom :Burnout
+                                                                           ]
+                                                                           [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty :hasMedicalCondition ;
+                                                                             owl:someValuesFrom :Insomnia
+                                                                           ]
+                                                                         )
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] ;
+                rdfs:subClassOf :SongAccordingToCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#MediumTempoSong
+:MediumTempoSong rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( :MediumTempoSong
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :hasBPM ;
+                                                              owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                   owl:onDatatype xsd:int ;
+                                                                                   owl:withRestrictions ( [ xsd:minInclusive "76"^^xsd:int
+                                                                                                          ]
+                                                                                                          [ xsd:maxExclusive "120"^^xsd:int
+                                                                                                          ]
+                                                                                                        )
+                                                                                 ]
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf :SongAccordingToTempo .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#MemoryProblems
+:MemoryProblems rdf:type owl:Class ;
+                rdfs:subClassOf :CognitiveSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#MemorySupport
+:MemorySupport rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( :MemorySupport
+                                                          [ rdf:type owl:Class ;
+                                                            owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty :hasGenre ;
+                                                                            owl:someValuesFrom :Ambient
+                                                                          ]
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty :hasGenre ;
+                                                                            owl:someValuesFrom :ClassicalMusic
+                                                                          ]
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty :hasGenre ;
+                                                                            owl:someValuesFrom :FolkMusic
+                                                                          ]
+                                                                        )
+                                                          ]
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasBPM ;
+                                                            owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                 owl:onDatatype xsd:int ;
+                                                                                 owl:withRestrictions ( [ xsd:minInclusive "55"^^xsd:int
+                                                                                                        ]
+                                                                                                        [ xsd:maxExclusive "80"^^xsd:int
+                                                                                                        ]
+                                                                                                      )
+                                                                               ]
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+               rdfs:subClassOf :CognitiveEffect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#MentalFatigue
+:MentalFatigue rdf:type owl:Class ;
+               rdfs:subClassOf :CognitiveSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#MentalState
+:MentalState rdf:type owl:Class ;
+             rdfs:subClassOf :State .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Metal
+:Metal rdf:type owl:Class ;
+       rdfs:subClassOf :SongAccordingToGenre .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#MoodImprovementEffect
+:MoodImprovementEffect rdf:type owl:Class ;
+                       owl:equivalentClass [ owl:intersectionOf ( :MoodImprovementEffect
+                                                                  [ rdf:type owl:Class ;
+                                                                    owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasGenre ;
+                                                                                    owl:someValuesFrom :ElectronicMusic
+                                                                                  ]
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasGenre ;
+                                                                                    owl:someValuesFrom :PopularMusic
+                                                                                  ]
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasGenre ;
+                                                                                    owl:someValuesFrom :RockMusic
+                                                                                  ]
+                                                                                )
+                                                                  ]
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasBPM ;
+                                                                    owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                         owl:onDatatype xsd:int ;
+                                                                                         owl:withRestrictions ( [ xsd:minInclusive "120"^^xsd:int
+                                                                                                                ]
+                                                                                                                [ xsd:maxExclusive "150"^^xsd:int
+                                                                                                                ]
+                                                                                                              )
+                                                                                       ]
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ] ;
+                       rdfs:subClassOf :TherapeuticEffect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#MuscleFatigue
+:MuscleFatigue rdf:type owl:Class ;
+               rdfs:subClassOf :PhysicalSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Neofolk
+:Neofolk rdf:type owl:Class ;
+         rdfs:subClassOf :FolkMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#OldSchoolHip-hop
+:OldSchoolHip-hop rdf:type owl:Class ;
+                  rdfs:subClassOf :Hip-Hop .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Opera
+:Opera rdf:type owl:Class ;
+       rdfs:subClassOf :ClassicalMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#OriginalSoundtrack
+:OriginalSoundtrack rdf:type owl:Class ;
+                    rdfs:subClassOf :Soundtrack .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#PhysicalEffect
+:PhysicalEffect rdf:type owl:Class ;
+                rdfs:subClassOf :Effect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#PhysicalState
+:PhysicalState rdf:type owl:Class ;
+               rdfs:subClassOf :State .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#PhysicalSymptom
+:PhysicalSymptom rdf:type owl:Class ;
+                 rdfs:subClassOf :Symptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Playlist
+:Playlist rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#PoorConcentration
+:PoorConcentration rdf:type owl:Class ;
+                   rdfs:subClassOf :CognitiveSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#PoorSleepQuality
+:PoorSleepQuality rdf:type owl:Class ;
+                  rdfs:subClassOf :SleepSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Pop
+:Pop rdf:type owl:Class ;
+     rdfs:subClassOf :PopularMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#PopularMusic
+:PopularMusic rdf:type owl:Class ;
+              rdfs:subClassOf :SongAccordingToGenre .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#PopularSong
+:PopularSong rdf:type owl:Class ;
+             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                   owl:onProperty :hasPopularity ;
+                                   owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                        owl:onDatatype xsd:int ;
+                                                        owl:withRestrictions ( [ xsd:minInclusive "1000000"^^xsd:int
+                                                                               ]
+                                                                             )
+                                                      ]
+                                 ] ;
+             rdfs:subClassOf :Song .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ProgressiveRock
+:ProgressiveRock rdf:type owl:Class ;
+                 rdfs:subClassOf :RockMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#PunkRock
+:PunkRock rdf:type owl:Class ;
+          rdfs:subClassOf :RockMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Reading
+:Reading rdf:type owl:Class ;
+         rdfs:subClassOf :Activity .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ReadingDifficulty
+:ReadingDifficulty rdf:type owl:Class ;
+                   rdfs:subClassOf :CognitiveSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#RecoverySupport
+:RecoverySupport rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( :RecoverySupport
+                                                            [ rdf:type owl:Class ;
+                                                              owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty :hasGenre ;
+                                                                              owl:someValuesFrom :Ambient
+                                                                            ]
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty :hasGenre ;
+                                                                              owl:someValuesFrom :Chillout
+                                                                            ]
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty :hasGenre ;
+                                                                              owl:someValuesFrom :Meditation
+                                                                            ]
+                                                                          )
+                                                            ]
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :hasBPM ;
+                                                              owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                   owl:onDatatype xsd:int ;
+                                                                                   owl:withRestrictions ( [ xsd:minInclusive "50"^^xsd:int
+                                                                                                          ]
+                                                                                                          [ xsd:maxExclusive "70"^^xsd:int
+                                                                                                          ]
+                                                                                                        )
+                                                                                 ]
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf :PhysicalEffect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Reggaeton
+:Reggaeton rdf:type owl:Class ;
+           rdfs:subClassOf :LatinMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Relaxation
+:Relaxation rdf:type owl:Class ;
+            rdfs:subClassOf :Activity .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#RelaxationEffect
+:RelaxationEffect rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( :RelaxationEffect
+                                                             [ rdf:type owl:Class ;
+                                                               owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasGenre ;
+                                                                               owl:someValuesFrom :Ambient
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasGenre ;
+                                                                               owl:someValuesFrom :Chillout
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasGenre ;
+                                                                               owl:someValuesFrom :ClassicalMusic
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasGenre ;
+                                                                               owl:someValuesFrom :Lo-fi
+                                                                             ]
+                                                                           )
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty :hasBPM ;
+                                                               owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                    owl:onDatatype xsd:int ;
+                                                                                    owl:withRestrictions ( [ xsd:minInclusive "55"^^xsd:int
+                                                                                                           ]
+                                                                                                           [ xsd:maxExclusive "80"^^xsd:int
+                                                                                                           ]
+                                                                                                         )
+                                                                                  ]
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf :TherapeuticEffect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#RelaxationState
+:RelaxationState rdf:type owl:Class ;
+                 rdfs:subClassOf :MentalState .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Restlessness
+:Restlessness rdf:type owl:Class ;
+              rdfs:subClassOf :PhysicalSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#RockAndRoll
+:RockAndRoll rdf:type owl:Class ;
+             rdfs:subClassOf :RockMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#RockMusic
+:RockMusic rdf:type owl:Class ;
+           rdfs:subClassOf :SongAccordingToGenre .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Romantic
+:Romantic rdf:type owl:Class ;
+          owl:equivalentClass [ owl:intersectionOf ( :Emotion
+                                                     [ rdf:type owl:Class ;
+                                                       owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :hasGenre ;
+                                                                       owl:someValuesFrom :ClassicalMusic
+                                                                     ]
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :hasGenre ;
+                                                                       owl:someValuesFrom :Jazz
+                                                                     ]
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :hasGenre ;
+                                                                       owl:someValuesFrom :PopularMusic
+                                                                     ]
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :hasGenre ;
+                                                                       owl:someValuesFrom :WorldMusic
+                                                                     ]
+                                                                   )
+                                                     ]
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :hasBPM ;
+                                                       owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                            owl:onDatatype xsd:int ;
+                                                                            owl:withRestrictions ( [ xsd:minInclusive "80"^^xsd:int
+                                                                                                   ]
+                                                                                                   [ xsd:maxExclusive "110"^^xsd:int
+                                                                                                   ]
+                                                                                                 )
+                                                                          ]
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] ;
+          rdfs:subClassOf :Emotion .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Running
+:Running rdf:type owl:Class ;
+         rdfs:subClassOf :Activity .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Sad
+:Sad rdf:type owl:Class ;
+     owl:equivalentClass [ owl:intersectionOf ( :Emotion
+                                                [ rdf:type owl:Class ;
+                                                  owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :hasGenre ;
+                                                                  owl:someValuesFrom :Blues
+                                                                ]
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :hasGenre ;
+                                                                  owl:someValuesFrom :ClassicalMusic
+                                                                ]
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :hasGenre ;
+                                                                  owl:someValuesFrom :FolkMusic
+                                                                ]
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :hasGenre ;
+                                                                  owl:someValuesFrom :Jazz
+                                                                ]
+                                                              )
+                                                ]
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty :hasBPM ;
+                                                  owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                       owl:onDatatype xsd:int ;
+                                                                       owl:withRestrictions ( [ xsd:minInclusive "55"^^xsd:int
+                                                                                              ]
+                                                                                              [ xsd:maxExclusive "80"^^xsd:int
+                                                                                              ]
+                                                                                            )
+                                                                     ]
+                                                ]
+                                              ) ;
+                           rdf:type owl:Class
+                         ] ;
+     rdfs:subClassOf :Emotion .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Sadness
+:Sadness rdf:type owl:Class ;
+         rdfs:subClassOf :EmotionalSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Salsa
+:Salsa rdf:type owl:Class ;
+       rdfs:subClassOf :LatinMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Schizophrenia
+:Schizophrenia rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( :MedicalCondition
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasSymptom ;
+                                                            owl:someValuesFrom :AnxietySymptom
+                                                          ]
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasSymptom ;
+                                                            owl:someValuesFrom :Apathy
+                                                          ]
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasSymptom ;
+                                                            owl:someValuesFrom :BrainFog
+                                                          ]
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasSymptom ;
+                                                            owl:someValuesFrom :LackOfMotivation
+                                                          ]
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasSymptom ;
+                                                            owl:someValuesFrom :PoorConcentration
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+               rdfs:subClassOf :MedicalCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#SchizophreniaSupportSong
+:SchizophreniaSupportSong rdf:type owl:Class ;
+                          owl:equivalentClass [ owl:intersectionOf ( :SchizophreniaSupportSong
+                                                                     [ rdf:type owl:Class ;
+                                                                       owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                       owl:onProperty :hasEffect ;
+                                                                                       owl:someValuesFrom :FocusEnhancementEffect
+                                                                                     ]
+                                                                                     [ rdf:type owl:Restriction ;
+                                                                                       owl:onProperty :hasEffect ;
+                                                                                       owl:someValuesFrom :MoodImprovementEffect
+                                                                                     ]
+                                                                                     [ rdf:type owl:Restriction ;
+                                                                                       owl:onProperty :hasEffect ;
+                                                                                       owl:someValuesFrom :RelaxationEffect
+                                                                                     ]
+                                                                                   )
+                                                                     ]
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :hasMedicalCondition ;
+                                                                       owl:someValuesFrom :Schizophrenia
+                                                                     ]
+                                                                   ) ;
+                                                rdf:type owl:Class
+                                              ] ;
+                          rdfs:subClassOf :SongAccordingToCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#SevereFatigue
+:SevereFatigue rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( :SevereFatigue
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasSymptom ;
+                                                            owl:someValuesFrom :Exhaustion
+                                                          ]
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasSymptom ;
+                                                            owl:someValuesFrom :LowEnergy
+                                                          ]
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasSymptom ;
+                                                            owl:someValuesFrom :SevereFatigueSymptom
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+               rdfs:subClassOf :MedicalCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#SevereFatigueSymptom
+:SevereFatigueSymptom rdf:type owl:Class ;
+                      rdfs:subClassOf :EnergySymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#SleepAidSong
+:SleepAidSong rdf:type owl:Class ;
+              owl:equivalentClass [ owl:intersectionOf ( :SleepAidSong
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty :hasEffect ;
+                                                           owl:someValuesFrom :SleepInductionEffect
+                                                         ]
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty :hasGenre ;
+                                                           owl:someValuesFrom [ rdf:type owl:Class ;
+                                                                                owl:unionOf ( :Ambient
+                                                                                              :Chillout
+                                                                                              :ClassicalMusic
+                                                                                            )
+                                                                              ]
+                                                         ]
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty :hasBPM ;
+                                                           owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                owl:onDatatype xsd:int ;
+                                                                                owl:withRestrictions ( [ xsd:minInclusive "40"^^xsd:int
+                                                                                                       ]
+                                                                                                       [ xsd:maxExclusive "55"^^xsd:int
+                                                                                                       ]
+                                                                                                     )
+                                                                              ]
+                                                         ]
+                                                       ) ;
+                                    rdf:type owl:Class
+                                  ] ;
+              rdfs:subClassOf :SongAccordingToCondition .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#SleepInductionEffect
+:SleepInductionEffect rdf:type owl:Class ;
+                      owl:equivalentClass [ owl:intersectionOf ( :SleepInductionEffect
+                                                                 [ rdf:type owl:Class ;
+                                                                   owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                   owl:onProperty :hasGenre ;
+                                                                                   owl:someValuesFrom :Ambient
+                                                                                 ]
+                                                                                 [ rdf:type owl:Restriction ;
+                                                                                   owl:onProperty :hasGenre ;
+                                                                                   owl:someValuesFrom :Chillout
+                                                                                 ]
+                                                                                 [ rdf:type owl:Restriction ;
+                                                                                   owl:onProperty :hasGenre ;
+                                                                                   owl:someValuesFrom :Meditation
+                                                                                 ]
+                                                                               )
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasBPM ;
+                                                                   owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                        owl:onDatatype xsd:int ;
+                                                                                        owl:withRestrictions ( [ xsd:minInclusive "40"^^xsd:int
+                                                                                                               ]
+                                                                                                               [ xsd:maxExclusive "60"^^xsd:int
+                                                                                                               ]
+                                                                                                             )
+                                                                                      ]
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ;
+                      rdfs:subClassOf :TherapeuticEffect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#SleepSymptom
+:SleepSymptom rdf:type owl:Class ;
+              rdfs:subClassOf :Symptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Sleeping
+:Sleeping rdf:type owl:Class ;
+          rdfs:subClassOf :Activity .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#SlowTempoSong
+:SlowTempoSong rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( :SlowTempoSong
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasBPM ;
+                                                            owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                 owl:onDatatype xsd:int ;
+                                                                                 owl:withRestrictions ( [ xsd:minInclusive "40"^^xsd:int
+                                                                                                        ]
+                                                                                                        [ xsd:maxExclusive "76"^^xsd:int
+                                                                                                        ]
+                                                                                                      )
+                                                                               ]
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+               rdfs:subClassOf :SongAccordingToTempo .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#SoloArtist
+:SoloArtist rdf:type owl:Class ;
+            rdfs:subClassOf :Artist .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Song
+:Song rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#SongAccordingToCondition
+:SongAccordingToCondition rdf:type owl:Class ;
+                          owl:equivalentClass [ rdf:type owl:Class ;
+                                                owl:unionOf ( :AnxietyReliefSong
+                                                              :DepressionFriendlySong
+                                                              :FocusEnhancementSong
+                                                              :HighPerformanceSong
+                                                              :MeditationSong
+                                                              :SleepAidSong
+                                                            )
+                                              ] ;
+                          rdfs:subClassOf :Song .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#SongAccordingToGenre
+:SongAccordingToGenre rdf:type owl:Class ;
+                      rdfs:subClassOf :Song .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#SongAccordingToTempo
+:SongAccordingToTempo rdf:type owl:Class ;
+                      owl:equivalentClass [ rdf:type owl:Class ;
+                                            owl:unionOf ( :FastTempoSong
+                                                          :MediumTempoSong
+                                                          :SlowTempoSong
+                                                        )
+                                          ] ;
+                      rdfs:subClassOf :Song .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Soundtrack
+:Soundtrack rdf:type owl:Class ;
+            rdfs:subClassOf :SongAccordingToGenre .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#State
+:State rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#StressReductionEffect
+:StressReductionEffect rdf:type owl:Class ;
+                       owl:equivalentClass [ owl:intersectionOf ( :StressReductionEffect
+                                                                  [ rdf:type owl:Class ;
+                                                                    owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasGenre ;
+                                                                                    owl:someValuesFrom :Ambient
+                                                                                  ]
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasGenre ;
+                                                                                    owl:someValuesFrom :Chillout
+                                                                                  ]
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasGenre ;
+                                                                                    owl:someValuesFrom :ClassicalMusic
+                                                                                  ]
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasGenre ;
+                                                                                    owl:someValuesFrom :Lo-fi
+                                                                                  ]
+                                                                                )
+                                                                  ]
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasBPM ;
+                                                                    owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                         owl:onDatatype xsd:int ;
+                                                                                         owl:withRestrictions ( [ xsd:minInclusive "60"^^xsd:int
+                                                                                                                ]
+                                                                                                                [ xsd:maxExclusive "80"^^xsd:int
+                                                                                                                ]
+                                                                                                              )
+                                                                                       ]
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ] ;
+                       rdfs:subClassOf :TherapeuticEffect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Stressed
+:Stressed rdf:type owl:Class ;
+          rdfs:subClassOf :RelaxationState .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Study
+:Study rdf:type owl:Class ;
+       rdfs:subClassOf :Activity .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Swing
+:Swing rdf:type owl:Class ;
+       rdfs:subClassOf :Jazz .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Symphonic
+:Symphonic rdf:type owl:Class ;
+           rdfs:subClassOf :ClassicalMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Symptom
+:Symptom rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Techno
+:Techno rdf:type owl:Class ;
+        rdfs:subClassOf :ElectronicMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#TeenPop
+:TeenPop rdf:type owl:Class ;
+         rdfs:subClassOf :PopularMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Tension
+:Tension rdf:type owl:Class ;
+         rdfs:subClassOf :PhysicalSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#TexasBlues
+:TexasBlues rdf:type owl:Class ;
+            rdfs:subClassOf :Blues .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#TherapeuticEffect
+:TherapeuticEffect rdf:type owl:Class ;
+                   rdfs:subClassOf :Effect .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ThrashMetal
+:ThrashMetal rdf:type owl:Class ;
+             rdfs:subClassOf :Metal .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#TraditionalFolk
+:TraditionalFolk rdf:type owl:Class ;
+                 rdfs:subClassOf :FolkMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Trance
+:Trance rdf:type owl:Class ;
+        rdfs:subClassOf :ElectronicMusic .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Trap
+:Trap rdf:type owl:Class ;
+      rdfs:subClassOf :Hip-Hop .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#UserProfile
+:UserProfile rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Vaporwave
+:Vaporwave rdf:type owl:Class ;
+           rdfs:subClassOf :Hybrid .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#VisualProcessingIssue
+:VisualProcessingIssue rdf:type owl:Class ;
+                       rdfs:subClassOf :CognitiveSymptom .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Walking
+:Walking rdf:type owl:Class ;
+         rdfs:subClassOf :Activity .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Working
+:Working rdf:type owl:Class ;
+         rdfs:subClassOf :Activity .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Workout
+:Workout rdf:type owl:Class ;
+         rdfs:subClassOf :Activity .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#WorldMusic
+:WorldMusic rdf:type owl:Class ;
+            rdfs:subClassOf :SongAccordingToGenre .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Writing
+:Writing rdf:type owl:Class ;
+         rdfs:subClassOf :Activity .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ADHD_Condition
+:ADHD_Condition rdf:type owl:NamedIndividual ,
+                         :ADHD .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Ambient_Genre
+:Ambient_Genre rdf:type owl:NamedIndividual ,
+                        :Ambient .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Happy_State
+:Happy_State rdf:type owl:NamedIndividual ,
+                      :Happy .
+
+
+###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Song_Sleep_1
+:Song_Sleep_1 rdf:type owl:NamedIndividual ,
+                       :Song ;
+              :hasGenre :Ambient_Genre ;
+              :hasMood :Happy_State ;
+              :hasBPM 60 ;
+              :hasDuration 240 ;
+              :hasHz 2 ;
+              :hasPopularity 20000 ;
+              :hasYear 2020 .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :ADHD
+                :Burnout
+                :Depression
+                :Dyslexia
+                :SevereFatigue
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Activity
+                :Artist
+                :Effect
+                :Playlist
+                :Song
+                :State
+                :Symptom
+                :UserProfile
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Afrobeat
+                :BalkanMusic
+                :LatinMusic
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AlternativeRock
+                :HardRock
+                :IndieRock
+                :ProgressiveRock
+                :PunkRock
+                :RockAndRoll
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Ambient
+                :Dubste
+                :Electro
+                :House
+                :Techno
+                :Trance
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Angry
+                :Happy
+                :Romantic
+                :Sad
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AnxietyReductionEffect
+                :FocusEnhancementEffect
+                :MoodImprovementEffect
+                :RelaxationEffect
+                :SleepInductionEffect
+                :StressReductionEffect
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AnxietyReliefSong
+                :FocusEnhancementSong
+                :HighPerformanceSong
+                :MeditationSong
+                :SleepAidSong
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AnxietySymptom
+                :Apathy
+                :EmotionalOverload
+                :Irritability
+                :LackOfMotivation
+                :Sadness
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Bachata
+                :Reggaeton
+                :Salsa
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Band
+                :DJ
+                :SoloArtist
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Baroque
+                :Opera
+                :Symphonic
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BlackMetal
+                :DeathMetal
+                :HeavyMetal
+                :ThrashMetal
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Blues
+                :ClassicalMusic
+                :ElectronicMusic
+                :FolkMusic
+                :Hip-Hop
+                :Hybrid
+                :Jazz
+                :Metal
+                :PopularMusic
+                :RockMusic
+                :Soundtrack
+                :WorldMusic
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BrainFog
+                :Distractibility
+                :MemoryProblems
+                :MentalFatigue
+                :PoorConcentration
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BrainFog
+                :Distractibility
+                :MemoryProblems
+                :MentalFatigue
+                :PoorConcentration
+                :ReadingDifficulty
+                :VisualProcessingIssue
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BurnoutFeeling
+                :Exhaustion
+                :LowEnergy
+                :SevereFatigueSymptom
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :ChicagoBlues
+                :DeltaBlues
+                :TexasBlues
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Chillout
+                :Lo-fi
+                :Vaporwave
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Coding
+                :Driving
+                :Gaming
+                :Meditation
+                :Reading
+                :Relaxation
+                :Running
+                :Sleeping
+                :Study
+                :Walking
+                :Working
+                :Workout
+                :Writing
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :CognitiveEffect
+                :PhysicalEffect
+                :TherapeuticEffect
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :CognitiveState
+                :Emotion
+                :EnergyState
+                :RelaxationState
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :CognitiveSymptom
+                :EmotionalSymptom
+                :EnergySymptom
+                :PhysicalSymptom
+                :SleepSymptom
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :ConcentrationBoost
+                :CreativityEnhancement
+                :MemorySupport
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Country
+                :Neofolk
+                :TraditionalFolk
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :DancePop
+                :ElectroPop
+                :J-pop
+                :K-pop
+                :Pop
+                :TeenPop
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :EnergyBoost
+                :FatigueReduction
+                :RecoverySupport
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :FastTempoSong
+                :MediumTempoSong
+                :SlowTempoSong
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Headache
+                :MuscleFatigue
+                :Restlessness
+                :Tension
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Lo-fiHip-hop
+                :OldSchoolHip-hop
+                :Trap
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :MedicalCondition
+                :MentalState
+                :PhysicalState
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
