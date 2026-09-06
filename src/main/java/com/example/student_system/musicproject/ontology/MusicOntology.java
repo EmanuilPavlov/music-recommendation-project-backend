@@ -321,10 +321,6 @@ public class MusicOntology {
         return ranges;
     }
 
-    public BPMRange getBPMRangeForTempo(String tempoName) {
-        return tempoBPMRanges.get(tempoName);
-    }
-
     public List<String> getGenresForMood(String mood) {
         return moodGenres.getOrDefault(mood, Collections.emptyList());
     }
