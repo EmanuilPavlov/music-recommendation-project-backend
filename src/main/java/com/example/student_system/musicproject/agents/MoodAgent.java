@@ -64,14 +64,17 @@ public class MoodAgent extends Agent {
                 return;
             }
 
-            MusicOntology.BPMRange range = ontology.getBPMRangeForMood(userMood);
-
-            Integer bpmMin = range != null ? range.min() : null;
-            Integer bpmMax = range != null ? range.max() - 1 : null;
+            List<MusicOntology.BPMRange> ranges = ontology.getBPMRangesForMood(userMood);
 
             List<SongData> allSongs = new ArrayList<>();
             for (String genre : genres) {
-                allSongs.addAll(audiusService.searchTracks(genre, bpmMin, bpmMax, 100));
+                if (ranges.isEmpty()) {
+                    allSongs.addAll(audiusService.searchTracks(genre, null, null, 100));
+                    continue;
+                }
+                for (MusicOntology.BPMRange range : ranges) {
+                    allSongs.addAll(audiusService.searchTracks(genre, range.min(), range.max() - 1, 100));
+                }
             }
 
             List<SongData> filteredSongs = new ArrayList<>();
