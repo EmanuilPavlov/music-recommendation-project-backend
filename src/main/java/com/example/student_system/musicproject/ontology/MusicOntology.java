@@ -14,26 +14,13 @@ public class MusicOntology {
 
     private static final String FILE_PATH = "music.rdf";
     private static final String NS = "http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#";
+    private final Map<String, BPMRange> tempoBPMRanges = new HashMap<>();
 
-    private final Map<String, BPMRange> moodBPMRanges = new HashMap<>();
     private final Map<String, List<String>> moodGenres = new HashMap<>();
-
-    // MedicalCondition -> list of Symptom local names (hasSymptom restrictions)
+    private final Map<String, List<String>> moodTempos = new HashMap<>();
     private final Map<String, List<String>> conditionSymptoms = new HashMap<>();
-
-    // Effect -> BPMRange / genres, read straight from the Effect class's OWN equivalentClass
-    // definition (same intersectionOf(self, unionOf(hasGenre...), hasBPM) shape as Emotion).
-    private final Map<String, BPMRange> effectBPMRanges = new HashMap<>();
     private final Map<String, List<String>> effectGenres = new HashMap<>();
-
-    // MedicalCondition -> list of Effect local names, read from the SongAccordingToCondition
-    // subclasses (AnxietyReliefSong, DepressionFriendlySong, FocusEnhancementSong,
-    // HighPerformanceSong, MeditationSong, SleepAidSong), which are the only place in this
-    // ontology that actually links a condition to an effect. There is no Effect->Symptom
-    // property anywhere in the ontology, so this replaces the old
-    // condition->symptom->effect matching, which could never produce results.
-    // NOTE: SleepAidSong has no hasMedicalCondition restriction in the ontology as authored,
-    // so Insomnia will not pick up SleepInductionEffect through this map unless that's added.
+    private final Map<String, List<String>> effectTempos = new HashMap<>();
     private final Map<String, List<String>> conditionEffects = new HashMap<>();
 
     private OntModel model;
@@ -49,6 +36,7 @@ public class MusicOntology {
     private void init() {
         loadOntology();
         initCustomProperties();
+        loadTempoDefinitions();
         loadMoodDefinitions();
         loadConditionDefinitions();
         loadEffectDefinitions();
@@ -74,11 +62,6 @@ public class MusicOntology {
         MAX_EXCLUSIVE = model.createProperty(XSD.NS + "maxExclusive");
     }
 
-    // model is OWL_DL_MEM with no reasoner attached, so OntClass.listSubClasses() only
-    // reliably finds DIRECT children - it does not walk multi-hop rdfs:subClassOf chains.
-    // Effect has an extra layer (Effect -> CognitiveEffect/PhysicalEffect/TherapeuticEffect
-    // -> the actual effect classes), so the built-in call silently returns zero usable
-    // classes for it. This does the traversal manually so it works regardless of depth.
     private List<OntClass> listAllSubClasses(OntClass root) {
         List<OntClass> result = new ArrayList<>();
         Set<String> seen = new HashSet<>();
@@ -99,6 +82,21 @@ public class MusicOntology {
         return result;
     }
 
+    private void loadTempoDefinitions() {
+        OntClass tempoClass = model.getOntClass(NS + "SongAccordingToTempo");
+        if (tempoClass == null) return;
+
+        for (OntClass tempo : listAllSubClasses(tempoClass)) {
+            String name = tempo.getLocalName();
+            if (name == null) continue;
+
+            tempo.listEquivalentClasses().forEachRemaining(eq -> {
+                BPMRange bpmRange = extractBpmRange(eq);
+                if (bpmRange != null) tempoBPMRanges.put(name, bpmRange);
+            });
+        }
+    }
+
     private void loadMoodDefinitions() {
         OntClass emotionClass = model.getOntClass(NS + "Emotion");
         if (emotionClass == null) return;
@@ -107,21 +105,15 @@ public class MusicOntology {
             String moodName = mood.getLocalName();
             if (moodName == null || moodName.equals("Emotion")) continue;
 
-            mood.listEquivalentClasses().forEachRemaining(eq -> {
-                BPMRange bpmRange = extractBpmRange(eq);
-                List<String> genres = extractGenres(eq);
+            List<String> genres = new ArrayList<>();
+            mood.listEquivalentClasses().forEachRemaining(eq -> genres.addAll(extractGenres(eq)));
+            if (!genres.isEmpty()) moodGenres.put(moodName, genres);
 
-                if (bpmRange != null) moodBPMRanges.put(moodName, bpmRange);
-                if (!genres.isEmpty()) moodGenres.put(moodName, genres);
-            });
+            List<String> tempos = extractRestrictionTargetsForClass(mood, "hasTempo");
+            if (!tempos.isEmpty()) moodTempos.put(moodName, tempos);
         }
     }
 
-    // MedicalCondition subclasses (ADHD, Anxiety, Burnout, ChronicPain, Dementia, Depression,
-    // Dyslexia, Insomnia, Schizophrenia, SevereFatigue) are defined via owl:equivalentClass +
-    // owl:intersectionOf of "hasSymptom someValuesFrom X" restrictions, each exposed directly
-    // in the intersection list (no unionOf wrapping) - so the plain case (A) path below is
-    // all that's needed here.
     private void loadConditionDefinitions() {
         OntClass conditionClass = model.getOntClass(NS + "MedicalCondition");
         if (conditionClass == null) return;
@@ -135,12 +127,6 @@ public class MusicOntology {
         }
     }
 
-    // Every Effect subclass (AnxietyReductionEffect, RelaxationEffect, ConcentrationBoost,
-    // EnergyBoost, SleepInductionEffect, etc.) carries its own equivalentClass definition in
-    // the exact same shape as the Emotion classes: intersectionOf(self, unionOf(hasGenre
-    // restrictions), hasBPM restriction). So this reuses extractBpmRange/extractGenres
-    // directly instead of trying to derive Effect BPM/genre indirectly through
-    // SongAccordingToCondition classes or through a Symptom link that doesn't exist.
     private void loadEffectDefinitions() {
         OntClass effectClass = model.getOntClass(NS + "Effect");
         if (effectClass == null) return;
@@ -149,23 +135,15 @@ public class MusicOntology {
             String name = effect.getLocalName();
             if (name == null) continue;
 
-            effect.listEquivalentClasses().forEachRemaining(eq -> {
-                BPMRange bpmRange = extractBpmRange(eq);
-                List<String> genres = extractGenres(eq);
+            List<String> genres = new ArrayList<>();
+            effect.listEquivalentClasses().forEachRemaining(eq -> genres.addAll(extractGenres(eq)));
+            if (!genres.isEmpty()) effectGenres.put(name, genres);
 
-                if (bpmRange != null) effectBPMRanges.put(name, bpmRange);
-                if (!genres.isEmpty()) effectGenres.put(name, genres);
-            });
+            List<String> tempos = extractRestrictionTargetsForClass(effect, "hasTempo");
+            if (!tempos.isEmpty()) effectTempos.put(name, tempos);
         }
     }
 
-    // SongAccordingToCondition subclasses are the only place this ontology links a
-    // MedicalCondition to an Effect. Both the hasEffect and hasMedicalCondition restrictions
-    // can appear either directly in the intersection list (SleepAidSong's hasEffect,
-    // AnxietyReliefSong/DepressionFriendlySong's hasMedicalCondition) or wrapped in a unionOf
-    // of alternative restrictions (AnxietyReliefSong/DepressionFriendlySong/MeditationSong's
-    // hasEffect; FocusEnhancementSong/HighPerformanceSong/MeditationSong's hasMedicalCondition).
-    // extractRestrictionTargetsForClass now handles both shapes uniformly.
     private void loadSongConditionDefinitions() {
         OntClass songConditionClass = model.getOntClass(NS + "SongAccordingToCondition");
         if (songConditionClass == null) return;
@@ -174,8 +152,6 @@ public class MusicOntology {
             List<String> effects = extractRestrictionTargetsForClass(songClass, "hasEffect");
             List<String> conditions = extractRestrictionTargetsForClass(songClass, "hasMedicalCondition");
 
-            // SleepAidSong currently has no hasMedicalCondition restriction in the ontology,
-            // so it's skipped here - it never claims a condition to link its effect to.
             if (effects.isEmpty() || conditions.isEmpty()) continue;
 
             for (String condition : conditions) {
@@ -229,8 +205,6 @@ public class MusicOntology {
         return (min != null && max != null) ? new BPMRange(min, max) : null;
     }
 
-    // Used for Emotion and Effect classes, whose hasGenre restrictions are always exposed as
-    // a unionOf several full Restriction objects (each with its own onProperty=hasGenre).
     private List<String> extractGenres(Resource equivalentClass) {
         Statement intersectionStmt = equivalentClass.getProperty(OWL.intersectionOf);
         if (intersectionStmt == null) return List.of();
@@ -268,15 +242,6 @@ public class MusicOntology {
         return new ArrayList<>(genres);
     }
 
-    // General-purpose extractor for "does this class require property P to have some value X"
-    // restrictions, handling both shapes actually used in this ontology:
-    //   (A) the restriction sits directly in the intersectionOf list
-    //       e.g. ADHD's hasSymptom restrictions, SleepAidSong's hasEffect restriction
-    //   (B) the restriction is one of several alternatives inside a unionOf
-    //       e.g. AnxietyReliefSong's hasEffect union, FocusEnhancementSong's
-    //       hasMedicalCondition union
-    // Also checks plain rdfs:subClassOf restrictions as a fallback in case some class in the
-    // ontology is authored that way instead of via equivalentClass.
     private List<String> extractRestrictionTargetsForClass(OntClass cls, String propertyLocalName) {
         Set<String> targets = new LinkedHashSet<>();
 
@@ -299,10 +264,8 @@ public class MusicOntology {
             if (!node.isResource()) continue;
             Resource resource = node.asResource();
 
-            // Case A: the intersection member IS the restriction.
             collectIfMatchingRestriction(resource, propertyLocalName, targets);
 
-            // Case B: the intersection member is a unionOf several alternative restrictions.
             Statement unionStmt = resource.getProperty(OWL.unionOf);
             if (unionStmt != null) {
                 RDFList unionList = unionStmt.getObject().asResource().as(RDFList.class);
@@ -349,40 +312,62 @@ public class MusicOntology {
         return targets;
     }
 
-    public boolean isBPMInMoodRange(int bpm, String mood) {
-        BPMRange range = moodBPMRanges.get(mood);
-        return range != null && bpm >= range.min() && bpm < range.max();
+    private List<BPMRange> resolveBpmRanges(List<String> tempoNames) {
+        List<BPMRange> ranges = new ArrayList<>();
+        for (String tempoName : tempoNames) {
+            BPMRange range = tempoBPMRanges.get(tempoName);
+            if (range != null) ranges.add(range);
+        }
+        return ranges;
+    }
+
+    public BPMRange getBPMRangeForTempo(String tempoName) {
+        return tempoBPMRanges.get(tempoName);
     }
 
     public List<String> getGenresForMood(String mood) {
         return moodGenres.getOrDefault(mood, Collections.emptyList());
     }
 
-    public BPMRange getBPMRangeForMood(String mood) {
-        return moodBPMRanges.get(mood);
+    public List<String> getTemposForMood(String mood) {
+        return moodTempos.getOrDefault(mood, Collections.emptyList());
+    }
+
+    public List<BPMRange> getBPMRangesForMood(String mood) {
+        return resolveBpmRanges(getTemposForMood(mood));
+    }
+
+    public boolean isBPMInMoodRange(int bpm, String mood) {
+        return getBPMRangesForMood(mood).stream().anyMatch(r -> bpm >= r.min() && bpm < r.max());
     }
 
     public List<String> getSymptomsForCondition(String condition) {
         return conditionSymptoms.getOrDefault(condition, Collections.emptyList());
     }
 
-    /** Condition name straight to the list of relevant Effect names, via SongAccordingToCondition. */
     public List<String> getEffectsForCondition(String condition) {
         return conditionEffects.getOrDefault(condition, Collections.emptyList());
-    }
-
-    public BPMRange getBPMRangeForEffect(String effect) {
-        return effectBPMRanges.get(effect);
     }
 
     public List<String> getGenresForEffect(String effect) {
         return effectGenres.getOrDefault(effect, Collections.emptyList());
     }
 
-    public boolean isBPMInEffectRange(int bpm, String effect) {
-        BPMRange range = effectBPMRanges.get(effect);
-        return range != null && bpm >= range.min() && bpm < range.max();
+    public List<String> getTemposForEffect(String effect) {
+        return effectTempos.getOrDefault(effect, Collections.emptyList());
     }
 
-    public record BPMRange(int min, int max) {}
+    public List<BPMRange> getBPMRangesForEffect(String effect) {
+        return resolveBpmRanges(getTemposForEffect(effect));
+    }
+
+    public boolean isBPMInEffectRange(int bpm, String effect) {
+        return getBPMRangesForEffect(effect).stream().anyMatch(r -> bpm >= r.min() && bpm < r.max());
+    }
+
+    public record BPMRange(int min, int max) {
+        public boolean contains(int bpm) {
+            return bpm >= min && bpm < max;
+        }
+    }
 }
