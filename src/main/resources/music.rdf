@@ -251,15 +251,8 @@
                                                                 )
                                                   ]
                                                   [ rdf:type owl:Restriction ;
-                                                    owl:onProperty :hasBPM ;
-                                                    owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                         owl:onDatatype xsd:int ;
-                                                                         owl:withRestrictions ( [ xsd:minInclusive "150"^^xsd:int
-                                                                                                ]
-                                                                                                [ xsd:maxExclusive "180"^^xsd:int
-                                                                                                ]
-                                                                                              )
-                                                                       ]
+                                                    owl:onProperty :hasTempo ;
+                                                    owl:someValuesFrom :FastTempoSong
                                                   ]
                                                 ) ;
                              rdf:type owl:Class
@@ -310,16 +303,20 @@
                                                                                    ]
                                                                                  )
                                                                    ]
-                                                                   [ rdf:type owl:Restriction ;
-                                                                     owl:onProperty :hasBPM ;
-                                                                     owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                                          owl:onDatatype xsd:int ;
-                                                                                          owl:withRestrictions ( [ xsd:minInclusive "60"^^xsd:int
-                                                                                                                 ]
-                                                                                                                 [ xsd:maxExclusive "80"^^xsd:int
-                                                                                                                 ]
-                                                                                                               )
-                                                                                        ]
+                                                                   [ rdf:type owl:Class ;
+                                                                     owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty :hasTempo ;
+                                                                                     owl:someValuesFrom :FastTempoSong
+                                                                                   ]
+                                                                                   [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty :hasTempo ;
+                                                                                     owl:someValuesFrom :MediumTempoSong
+                                                                                   ]
+                                                                                   [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty :hasTempo ;
+                                                                                     owl:someValuesFrom :SlowTempoSong
+                                                                                   ]
+                                                                                 )
                                                                    ]
                                                                  ) ;
                                               rdf:type owl:Class
@@ -406,31 +403,6 @@
           rdfs:subClassOf :CognitiveSymptom .
 
 
-###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Burnout
-:Burnout rdf:type owl:Class ;
-         owl:equivalentClass [ owl:intersectionOf ( :MedicalCondition
-                                                    [ rdf:type owl:Restriction ;
-                                                      owl:onProperty :hasSymptom ;
-                                                      owl:someValuesFrom :BrainFog
-                                                    ]
-                                                    [ rdf:type owl:Restriction ;
-                                                      owl:onProperty :hasSymptom ;
-                                                      owl:someValuesFrom :BurnoutFeeling
-                                                    ]
-                                                    [ rdf:type owl:Restriction ;
-                                                      owl:onProperty :hasSymptom ;
-                                                      owl:someValuesFrom :Exhaustion
-                                                    ]
-                                                    [ rdf:type owl:Restriction ;
-                                                      owl:onProperty :hasSymptom ;
-                                                      owl:someValuesFrom :LowEnergy
-                                                    ]
-                                                  ) ;
-                               rdf:type owl:Class
-                             ] ;
-         rdfs:subClassOf :MedicalCondition .
-
-
 ###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#BurnoutFeeling
 :BurnoutFeeling rdf:type owl:Class ;
                 rdfs:subClassOf :EnergySymptom .
@@ -450,59 +422,6 @@
 ###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Chillout
 :Chillout rdf:type owl:Class ;
           rdfs:subClassOf :Hybrid .
-
-
-###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ChronicPain
-:ChronicPain rdf:type owl:Class ;
-             owl:equivalentClass [ owl:intersectionOf ( :MedicalCondition
-                                                        [ rdf:type owl:Restriction ;
-                                                          owl:onProperty :hasSymptom ;
-                                                          owl:someValuesFrom :AnxietySymptom
-                                                        ]
-                                                        [ rdf:type owl:Restriction ;
-                                                          owl:onProperty :hasSymptom ;
-                                                          owl:someValuesFrom :Depression
-                                                        ]
-                                                        [ rdf:type owl:Restriction ;
-                                                          owl:onProperty :hasSymptom ;
-                                                          owl:someValuesFrom :Headache
-                                                        ]
-                                                        [ rdf:type owl:Restriction ;
-                                                          owl:onProperty :hasSymptom ;
-                                                          owl:someValuesFrom :MuscleFatigue
-                                                        ]
-                                                        [ rdf:type owl:Restriction ;
-                                                          owl:onProperty :hasSymptom ;
-                                                          owl:someValuesFrom :Tension
-                                                        ]
-                                                      ) ;
-                                   rdf:type owl:Class
-                                 ] ;
-             rdfs:subClassOf :MedicalCondition .
-
-
-###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ChronicPainReliefSong
-:ChronicPainReliefSong rdf:type owl:Class ;
-                       owl:equivalentClass [ owl:intersectionOf ( :ChronicPainReliefSong
-                                                                  [ rdf:type owl:Class ;
-                                                                    owl:unionOf ( [ rdf:type owl:Restriction ;
-                                                                                    owl:onProperty :hasEffect ;
-                                                                                    owl:someValuesFrom :RelaxationEffect
-                                                                                  ]
-                                                                                  [ rdf:type owl:Restriction ;
-                                                                                    owl:onProperty :hasEffect ;
-                                                                                    owl:someValuesFrom :StressReductionEffect
-                                                                                  ]
-                                                                                )
-                                                                  ]
-                                                                  [ rdf:type owl:Restriction ;
-                                                                    owl:onProperty :hasMedicalCondition ;
-                                                                    owl:someValuesFrom :ChronicPain
-                                                                  ]
-                                                                ) ;
-                                             rdf:type owl:Class
-                                           ] ;
-                       rdfs:subClassOf :SongAccordingToCondition .
 
 
 ###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#ClassicalMusic
@@ -552,16 +471,16 @@
                                                                                ]
                                                                              )
                                                                ]
-                                                               [ rdf:type owl:Restriction ;
-                                                                 owl:onProperty :hasBPM ;
-                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                                      owl:onDatatype xsd:int ;
-                                                                                      owl:withRestrictions ( [ xsd:minInclusive "60"^^xsd:int
-                                                                                                             ]
-                                                                                                             [ xsd:maxExclusive "90"^^xsd:int
-                                                                                                             ]
-                                                                                                           )
-                                                                                    ]
+                                                               [ rdf:type owl:Class ;
+                                                                 owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                 owl:onProperty :hasTempo ;
+                                                                                 owl:someValuesFrom :MediumTempoSong
+                                                                               ]
+                                                                               [ rdf:type owl:Restriction ;
+                                                                                 owl:onProperty :hasTempo ;
+                                                                                 owl:someValuesFrom :SlowTempoSong
+                                                                               ]
+                                                                             )
                                                                ]
                                                              ) ;
                                           rdf:type owl:Class
@@ -593,15 +512,8 @@
                                                                                 )
                                                                   ]
                                                                   [ rdf:type owl:Restriction ;
-                                                                    owl:onProperty :hasBPM ;
-                                                                    owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                                         owl:onDatatype xsd:int ;
-                                                                                         owl:withRestrictions ( [ xsd:minInclusive "80"^^xsd:int
-                                                                                                                ]
-                                                                                                                [ xsd:maxExclusive "120"^^xsd:int
-                                                                                                                ]
-                                                                                                              )
-                                                                                       ]
+                                                                    owl:onProperty :hasTempo ;
+                                                                    owl:someValuesFrom :MediumTempoSong
                                                                   ]
                                                                 ) ;
                                              rdf:type owl:Class
@@ -665,10 +577,6 @@
                                                                owl:unionOf ( [ rdf:type owl:Restriction ;
                                                                                owl:onProperty :hasEffect ;
                                                                                owl:someValuesFrom :MemorySupport
-                                                                             ]
-                                                                             [ rdf:type owl:Restriction ;
-                                                                               owl:onProperty :hasEffect ;
-                                                                               owl:someValuesFrom :MoodImprovementEffect
                                                                              ]
                                                                              [ rdf:type owl:Restriction ;
                                                                                owl:onProperty :hasEffect ;
@@ -856,16 +764,16 @@
                                                                         ]
                                                                       )
                                                         ]
-                                                        [ rdf:type owl:Restriction ;
-                                                          owl:onProperty :hasBPM ;
-                                                          owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                               owl:onDatatype xsd:int ;
-                                                                               owl:withRestrictions ( [ xsd:minInclusive "130"^^xsd:int
-                                                                                                      ]
-                                                                                                      [ xsd:maxExclusive "180"^^xsd:int
-                                                                                                      ]
-                                                                                                    )
-                                                                             ]
+                                                        [ rdf:type owl:Class ;
+                                                          owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :hasTempo ;
+                                                                          owl:someValuesFrom :FastTempoSong
+                                                                        ]
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :hasTempo ;
+                                                                          owl:someValuesFrom :MediumTempoSong
+                                                                        ]
+                                                                      )
                                                         ]
                                                       ) ;
                                    rdf:type owl:Class
@@ -936,15 +844,8 @@
                                                                            )
                                                              ]
                                                              [ rdf:type owl:Restriction ;
-                                                               owl:onProperty :hasBPM ;
-                                                               owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                                    owl:onDatatype xsd:int ;
-                                                                                    owl:withRestrictions ( [ xsd:minInclusive "55"^^xsd:int
-                                                                                                           ]
-                                                                                                           [ xsd:maxExclusive "80"^^xsd:int
-                                                                                                           ]
-                                                                                                         )
-                                                                                  ]
+                                                               owl:onProperty :hasTempo ;
+                                                               owl:someValuesFrom :SlowTempoSong
                                                              ]
                                                            ) ;
                                         rdf:type owl:Class
@@ -975,15 +876,8 @@
                                                                                  )
                                                                    ]
                                                                    [ rdf:type owl:Restriction ;
-                                                                     owl:onProperty :hasBPM ;
-                                                                     owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                                          owl:onDatatype xsd:int ;
-                                                                                          owl:withRestrictions ( [ xsd:minInclusive "60"^^xsd:int
-                                                                                                                 ]
-                                                                                                                 [ xsd:maxExclusive "90"^^xsd:int
-                                                                                                                 ]
-                                                                                                               )
-                                                                                        ]
+                                                                     owl:onProperty :hasTempo ;
+                                                                     owl:someValuesFrom :SlowTempoSong
                                                                    ]
                                                                  ) ;
                                               rdf:type owl:Class
@@ -1063,16 +957,16 @@
                                                                   ]
                                                                 )
                                                   ]
-                                                  [ rdf:type owl:Restriction ;
-                                                    owl:onProperty :hasBPM ;
-                                                    owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                         owl:onDatatype xsd:int ;
-                                                                         owl:withRestrictions ( [ xsd:minInclusive "120"^^xsd:int
-                                                                                                ]
-                                                                                                [ xsd:maxExclusive "150"^^xsd:int
-                                                                                                ]
-                                                                                              )
-                                                                       ]
+                                                  [ rdf:type owl:Class ;
+                                                    owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasTempo ;
+                                                                    owl:someValuesFrom :FastTempoSong
+                                                                  ]
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasTempo ;
+                                                                    owl:someValuesFrom :MediumTempoSong
+                                                                  ]
+                                                                )
                                                   ]
                                                 ) ;
                              rdf:type owl:Class
@@ -1093,37 +987,6 @@
 ###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#HeavyMetal
 :HeavyMetal rdf:type owl:Class ;
             rdfs:subClassOf :Metal .
-
-
-###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#HighPerformanceSong
-:HighPerformanceSong rdf:type owl:Class ;
-                     owl:equivalentClass [ owl:intersectionOf ( :HighPerformanceSong
-                                                                [ rdf:type owl:Class ;
-                                                                  owl:unionOf ( [ rdf:type owl:Restriction ;
-                                                                                  owl:onProperty :hasEffect ;
-                                                                                  owl:someValuesFrom :EnergyBoost
-                                                                                ]
-                                                                                [ rdf:type owl:Restriction ;
-                                                                                  owl:onProperty :hasEffect ;
-                                                                                  owl:someValuesFrom :MoodImprovementEffect
-                                                                                ]
-                                                                              )
-                                                                ]
-                                                                [ rdf:type owl:Class ;
-                                                                  owl:unionOf ( [ rdf:type owl:Restriction ;
-                                                                                  owl:onProperty :hasMedicalCondition ;
-                                                                                  owl:someValuesFrom :Burnout
-                                                                                ]
-                                                                                [ rdf:type owl:Restriction ;
-                                                                                  owl:onProperty :hasMedicalCondition ;
-                                                                                  owl:someValuesFrom :SevereFatigue
-                                                                                ]
-                                                                              )
-                                                                ]
-                                                              ) ;
-                                           rdf:type owl:Class
-                                         ] ;
-                     rdfs:subClassOf :SongAccordingToCondition .
 
 
 ###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Hip-Hop
@@ -1230,45 +1093,6 @@
             rdfs:subClassOf :Activity .
 
 
-###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#MeditationSong
-:MeditationSong rdf:type owl:Class ;
-                owl:equivalentClass [ owl:intersectionOf ( :MeditationSong
-                                                           [ rdf:type owl:Class ;
-                                                             owl:unionOf ( [ rdf:type owl:Restriction ;
-                                                                             owl:onProperty :hasEffect ;
-                                                                             owl:someValuesFrom :AnxietyReductionEffect
-                                                                           ]
-                                                                           [ rdf:type owl:Restriction ;
-                                                                             owl:onProperty :hasEffect ;
-                                                                             owl:someValuesFrom :RelaxationEffect
-                                                                           ]
-                                                                           [ rdf:type owl:Restriction ;
-                                                                             owl:onProperty :hasEffect ;
-                                                                             owl:someValuesFrom :StressReductionEffect
-                                                                           ]
-                                                                         )
-                                                           ]
-                                                           [ rdf:type owl:Class ;
-                                                             owl:unionOf ( [ rdf:type owl:Restriction ;
-                                                                             owl:onProperty :hasMedicalCondition ;
-                                                                             owl:someValuesFrom :Anxiety
-                                                                           ]
-                                                                           [ rdf:type owl:Restriction ;
-                                                                             owl:onProperty :hasMedicalCondition ;
-                                                                             owl:someValuesFrom :Burnout
-                                                                           ]
-                                                                           [ rdf:type owl:Restriction ;
-                                                                             owl:onProperty :hasMedicalCondition ;
-                                                                             owl:someValuesFrom :Insomnia
-                                                                           ]
-                                                                         )
-                                                           ]
-                                                         ) ;
-                                      rdf:type owl:Class
-                                    ] ;
-                rdfs:subClassOf :SongAccordingToCondition .
-
-
 ###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#MediumTempoSong
 :MediumTempoSong rdf:type owl:Class ;
                  owl:equivalentClass [ owl:intersectionOf ( :MediumTempoSong
@@ -1312,16 +1136,16 @@
                                                                           ]
                                                                         )
                                                           ]
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :hasBPM ;
-                                                            owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                                 owl:onDatatype xsd:int ;
-                                                                                 owl:withRestrictions ( [ xsd:minInclusive "55"^^xsd:int
-                                                                                                        ]
-                                                                                                        [ xsd:maxExclusive "80"^^xsd:int
-                                                                                                        ]
-                                                                                                      )
-                                                                               ]
+                                                          [ rdf:type owl:Class ;
+                                                            owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty :hasTempo ;
+                                                                            owl:someValuesFrom :MediumTempoSong
+                                                                          ]
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty :hasTempo ;
+                                                                            owl:someValuesFrom :SlowTempoSong
+                                                                          ]
+                                                                        )
                                                           ]
                                                         ) ;
                                      rdf:type owl:Class
@@ -1363,15 +1187,8 @@
                                                                                 )
                                                                   ]
                                                                   [ rdf:type owl:Restriction ;
-                                                                    owl:onProperty :hasBPM ;
-                                                                    owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                                         owl:onDatatype xsd:int ;
-                                                                                         owl:withRestrictions ( [ xsd:minInclusive "120"^^xsd:int
-                                                                                                                ]
-                                                                                                                [ xsd:maxExclusive "150"^^xsd:int
-                                                                                                                ]
-                                                                                                              )
-                                                                                       ]
+                                                                    owl:onProperty :hasTempo ;
+                                                                    owl:someValuesFrom :MediumTempoSong
                                                                   ]
                                                                 ) ;
                                              rdf:type owl:Class
@@ -1496,15 +1313,8 @@
                                                                           )
                                                             ]
                                                             [ rdf:type owl:Restriction ;
-                                                              owl:onProperty :hasBPM ;
-                                                              owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                                   owl:onDatatype xsd:int ;
-                                                                                   owl:withRestrictions ( [ xsd:minInclusive "50"^^xsd:int
-                                                                                                          ]
-                                                                                                          [ xsd:maxExclusive "70"^^xsd:int
-                                                                                                          ]
-                                                                                                        )
-                                                                                 ]
+                                                              owl:onProperty :hasTempo ;
+                                                              owl:someValuesFrom :SlowTempoSong
                                                             ]
                                                           ) ;
                                        rdf:type owl:Class
@@ -1544,16 +1354,16 @@
                                                                              ]
                                                                            )
                                                              ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty :hasBPM ;
-                                                               owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                                    owl:onDatatype xsd:int ;
-                                                                                    owl:withRestrictions ( [ xsd:minInclusive "55"^^xsd:int
-                                                                                                           ]
-                                                                                                           [ xsd:maxExclusive "80"^^xsd:int
-                                                                                                           ]
-                                                                                                         )
-                                                                                  ]
+                                                             [ rdf:type owl:Class ;
+                                                               owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasTempo ;
+                                                                               owl:someValuesFrom :MediumTempoSong
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasTempo ;
+                                                                               owl:someValuesFrom :SlowTempoSong
+                                                                             ]
+                                                                           )
                                                              ]
                                                            ) ;
                                         rdf:type owl:Class
@@ -1603,16 +1413,16 @@
                                                                      ]
                                                                    )
                                                      ]
-                                                     [ rdf:type owl:Restriction ;
-                                                       owl:onProperty :hasBPM ;
-                                                       owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                            owl:onDatatype xsd:int ;
-                                                                            owl:withRestrictions ( [ xsd:minInclusive "80"^^xsd:int
-                                                                                                   ]
-                                                                                                   [ xsd:maxExclusive "110"^^xsd:int
-                                                                                                   ]
-                                                                                                 )
-                                                                          ]
+                                                     [ rdf:type owl:Class ;
+                                                       owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :hasTempo ;
+                                                                       owl:someValuesFrom :MediumTempoSong
+                                                                     ]
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :hasTempo ;
+                                                                       owl:someValuesFrom :SlowTempoSong
+                                                                     ]
+                                                                   )
                                                      ]
                                                    ) ;
                                 rdf:type owl:Class
@@ -1648,15 +1458,8 @@
                                                               )
                                                 ]
                                                 [ rdf:type owl:Restriction ;
-                                                  owl:onProperty :hasBPM ;
-                                                  owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                       owl:onDatatype xsd:int ;
-                                                                       owl:withRestrictions ( [ xsd:minInclusive "55"^^xsd:int
-                                                                                              ]
-                                                                                              [ xsd:maxExclusive "80"^^xsd:int
-                                                                                              ]
-                                                                                            )
-                                                                     ]
+                                                  owl:onProperty :hasTempo ;
+                                                  owl:someValuesFrom :SlowTempoSong
                                                 ]
                                               ) ;
                            rdf:type owl:Class
@@ -1674,84 +1477,6 @@
        rdfs:subClassOf :LatinMusic .
 
 
-###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#Schizophrenia
-:Schizophrenia rdf:type owl:Class ;
-               owl:equivalentClass [ owl:intersectionOf ( :MedicalCondition
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :hasSymptom ;
-                                                            owl:someValuesFrom :AnxietySymptom
-                                                          ]
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :hasSymptom ;
-                                                            owl:someValuesFrom :Apathy
-                                                          ]
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :hasSymptom ;
-                                                            owl:someValuesFrom :BrainFog
-                                                          ]
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :hasSymptom ;
-                                                            owl:someValuesFrom :LackOfMotivation
-                                                          ]
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :hasSymptom ;
-                                                            owl:someValuesFrom :PoorConcentration
-                                                          ]
-                                                        ) ;
-                                     rdf:type owl:Class
-                                   ] ;
-               rdfs:subClassOf :MedicalCondition .
-
-
-###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#SchizophreniaSupportSong
-:SchizophreniaSupportSong rdf:type owl:Class ;
-                          owl:equivalentClass [ owl:intersectionOf ( :SchizophreniaSupportSong
-                                                                     [ rdf:type owl:Class ;
-                                                                       owl:unionOf ( [ rdf:type owl:Restriction ;
-                                                                                       owl:onProperty :hasEffect ;
-                                                                                       owl:someValuesFrom :FocusEnhancementEffect
-                                                                                     ]
-                                                                                     [ rdf:type owl:Restriction ;
-                                                                                       owl:onProperty :hasEffect ;
-                                                                                       owl:someValuesFrom :MoodImprovementEffect
-                                                                                     ]
-                                                                                     [ rdf:type owl:Restriction ;
-                                                                                       owl:onProperty :hasEffect ;
-                                                                                       owl:someValuesFrom :RelaxationEffect
-                                                                                     ]
-                                                                                   )
-                                                                     ]
-                                                                     [ rdf:type owl:Restriction ;
-                                                                       owl:onProperty :hasMedicalCondition ;
-                                                                       owl:someValuesFrom :Schizophrenia
-                                                                     ]
-                                                                   ) ;
-                                                rdf:type owl:Class
-                                              ] ;
-                          rdfs:subClassOf :SongAccordingToCondition .
-
-
-###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#SevereFatigue
-:SevereFatigue rdf:type owl:Class ;
-               owl:equivalentClass [ owl:intersectionOf ( :SevereFatigue
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :hasSymptom ;
-                                                            owl:someValuesFrom :Exhaustion
-                                                          ]
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :hasSymptom ;
-                                                            owl:someValuesFrom :LowEnergy
-                                                          ]
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :hasSymptom ;
-                                                            owl:someValuesFrom :SevereFatigueSymptom
-                                                          ]
-                                                        ) ;
-                                     rdf:type owl:Class
-                                   ] ;
-               rdfs:subClassOf :MedicalCondition .
-
-
 ###  http://www.semanticweb.org/emanuilpavlov/ontologies/2026/4/music#SevereFatigueSymptom
 :SevereFatigueSymptom rdf:type owl:Class ;
                       rdfs:subClassOf :EnergySymptom .
@@ -1765,24 +1490,8 @@
                                                            owl:someValuesFrom :SleepInductionEffect
                                                          ]
                                                          [ rdf:type owl:Restriction ;
-                                                           owl:onProperty :hasGenre ;
-                                                           owl:someValuesFrom [ rdf:type owl:Class ;
-                                                                                owl:unionOf ( :Ambient
-                                                                                              :Chillout
-                                                                                              :ClassicalMusic
-                                                                                            )
-                                                                              ]
-                                                         ]
-                                                         [ rdf:type owl:Restriction ;
-                                                           owl:onProperty :hasBPM ;
-                                                           owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                                owl:onDatatype xsd:int ;
-                                                                                owl:withRestrictions ( [ xsd:minInclusive "40"^^xsd:int
-                                                                                                       ]
-                                                                                                       [ xsd:maxExclusive "55"^^xsd:int
-                                                                                                       ]
-                                                                                                     )
-                                                                              ]
+                                                           owl:onProperty :hasMedicalCondition ;
+                                                           owl:someValuesFrom :Insomnia
                                                          ]
                                                        ) ;
                                     rdf:type owl:Class
@@ -1802,22 +1511,11 @@
                                                                                    owl:onProperty :hasGenre ;
                                                                                    owl:someValuesFrom :Chillout
                                                                                  ]
-                                                                                 [ rdf:type owl:Restriction ;
-                                                                                   owl:onProperty :hasGenre ;
-                                                                                   owl:someValuesFrom :Meditation
-                                                                                 ]
                                                                                )
                                                                  ]
                                                                  [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty :hasBPM ;
-                                                                   owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                                        owl:onDatatype xsd:int ;
-                                                                                        owl:withRestrictions ( [ xsd:minInclusive "40"^^xsd:int
-                                                                                                               ]
-                                                                                                               [ xsd:maxExclusive "60"^^xsd:int
-                                                                                                               ]
-                                                                                                             )
-                                                                                      ]
+                                                                   owl:onProperty :hasTempo ;
+                                                                   owl:someValuesFrom :SlowTempoSong
                                                                  ]
                                                                ) ;
                                             rdf:type owl:Class
@@ -1868,10 +1566,9 @@
 :SongAccordingToCondition rdf:type owl:Class ;
                           owl:equivalentClass [ rdf:type owl:Class ;
                                                 owl:unionOf ( :AnxietyReliefSong
+                                                              :DementiaCareSong
                                                               :DepressionFriendlySong
                                                               :FocusEnhancementSong
-                                                              :HighPerformanceSong
-                                                              :MeditationSong
                                                               :SleepAidSong
                                                             )
                                               ] ;
@@ -1925,16 +1622,16 @@
                                                                                   ]
                                                                                 )
                                                                   ]
-                                                                  [ rdf:type owl:Restriction ;
-                                                                    owl:onProperty :hasBPM ;
-                                                                    owl:someValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                                         owl:onDatatype xsd:int ;
-                                                                                         owl:withRestrictions ( [ xsd:minInclusive "60"^^xsd:int
-                                                                                                                ]
-                                                                                                                [ xsd:maxExclusive "80"^^xsd:int
-                                                                                                                ]
-                                                                                                              )
-                                                                                       ]
+                                                                  [ rdf:type owl:Class ;
+                                                                    owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasTempo ;
+                                                                                    owl:someValuesFrom :MediumTempoSong
+                                                                                  ]
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty :hasTempo ;
+                                                                                    owl:someValuesFrom :SlowTempoSong
+                                                                                  ]
+                                                                                )
                                                                   ]
                                                                 ) ;
                                              rdf:type owl:Class
@@ -2086,16 +1783,6 @@
 #################################################################
 
 [ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :ADHD
-                :Burnout
-                :Depression
-                :Dyslexia
-                :SevereFatigue
-              )
-] .
-
-
-[ rdf:type owl:AllDisjointClasses ;
   owl:members ( :Activity
                 :Artist
                 :Effect
@@ -2154,16 +1841,6 @@
                 :RelaxationEffect
                 :SleepInductionEffect
                 :StressReductionEffect
-              )
-] .
-
-
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :AnxietyReliefSong
-                :FocusEnhancementSong
-                :HighPerformanceSong
-                :MeditationSong
-                :SleepAidSong
               )
 ] .
 

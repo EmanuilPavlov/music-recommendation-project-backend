@@ -74,22 +74,28 @@ public class MedicalConditionAgent extends Agent {
             for (String effect : effects) {
                 if (results.size() >= limit) break;
 
-                MusicOntology.BPMRange range = ontology.getBPMRangeForEffect(effect);
-                if (range == null) continue;
-
                 List<String> genres = ontology.getGenresForEffect(effect);
                 if (genres.isEmpty()) continue;
+
+                List<MusicOntology.BPMRange> ranges = ontology.getBPMRangesForEffect(effect);
 
                 List<SongData> candidates = new ArrayList<>();
                 for (String genre : genres) {
                     if (candidates.size() >= 100) break;
-                    candidates.addAll(audiusService.searchTracks(genre, range.min(), range.max() - 1, 100));
+                    if (ranges.isEmpty()) {
+                        candidates.addAll(audiusService.searchTracks(genre, null, null, 100));
+                        continue;
+                    }
+                    for (MusicOntology.BPMRange range : ranges) {
+                        if (candidates.size() >= 100) break;
+                        candidates.addAll(audiusService.searchTracks(genre, range.min(), range.max() - 1, 100));
+                    }
                 }
 
                 for (SongData song : candidates) {
                     if (results.size() >= limit) break;
 
-                    if (ontology.isBPMInEffectRange(song.bpm(), effect)) {
+                    if (ranges.isEmpty() || ontology.isBPMInEffectRange(song.bpm(), effect)) {
                         results.add(MedicalConditionRecommendationResponse.builder()
                                 .title(song.title())
                                 .artist(song.artist())
