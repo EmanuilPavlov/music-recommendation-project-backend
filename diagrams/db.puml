@@ -1,0 +1,62 @@
+@startuml
+
+left to right direction
+
+skinparam shadowing false
+skinparam defaultTextAlignment left
+skinparam linetype ortho
+skinparam backgroundColor white
+
+skinparam nodesep 70
+skinparam ranksep 70
+skinparam dpi 200
+
+skinparam ArrowFontSize 12
+skinparam ClassFontSize 14
+skinparam ClassAttributeFontSize 12
+
+skinparam entity {
+    BackgroundColor white
+    BorderColor black
+    FontColor black
+    AttributeFontColor black
+}
+
+
+entity "users" as Users {
+    * firebase_uid : varchar(255) <<PK>>
+    --
+    email : varchar(255)
+    created_at : datetime(6)
+}
+
+
+entity "user_search_history" as History {
+    * id : bigint(20) <<PK>>
+    --
+    firebase_uid : varchar(255) <<FK>>
+    type_of_search : varchar(255)
+    limit_requested : int(11)
+    search_timestamp : datetime(6)
+}
+
+
+entity "song_recommendations" as Recommendations {
+    * id : bigint(20) <<PK>>
+    --
+    search_history_id : bigint(20) <<FK>>
+    title : varchar(255)
+    artist : varchar(255)
+    artwork : varchar(255)
+    audio_url : varchar(255)
+    bpm : int(11)
+    duration : double
+    mood : varchar(255)
+    medical_condition : varchar(255)
+}
+
+
+Users ||--o{ History : firebase_uid
+History ||--o{ Recommendations : search_history_id
+
+@enduml

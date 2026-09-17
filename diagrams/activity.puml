@@ -1,0 +1,77 @@
+@startuml
+
+top to bottom direction
+
+skinparam shadowing false
+skinparam defaultTextAlignment center
+skinparam linetype ortho
+
+skinparam nodesep 60
+skinparam ranksep 55
+skinparam dpi 200
+
+skinparam ArrowFontSize 13
+skinparam RectangleFontSize 14
+
+
+rectangle "Потребителски избор" as Input
+
+rectangle "Frontend приложение" as Frontend
+
+rectangle "Spring Boot\nсървърна част" as Backend
+
+rectangle "JADE\nмногоагентна система" as Jade
+
+
+rectangle "Настроение" as Mood
+rectangle "Медицинско\nсъстояние" as Condition
+
+
+rectangle "MoodAgent" as MoodAgent
+rectangle "MedicalConditionAgent" as MedicalAgent
+
+
+rectangle "Жанрове и BPM диапазони\nот онтологията" as MoodCriteria
+
+rectangle "Ефекти\nот онтологията" as Effects
+rectangle "Свързани\nсимптоми" as Symptoms
+rectangle "Жанрове и BPM диапазони\nспоред ефекта" as MedicalCriteria
+
+
+rectangle "Търсене на песни\nчрез Audius" as Audius
+
+rectangle "Филтриране по BPM\nи зададен брой резултати" as Filter
+
+rectangle "Музикални\nпрепоръки" as Results
+
+rectangle "Запис в историята" as History
+
+
+Input --> Frontend
+Frontend --> Backend
+Backend --> Jade
+
+Jade --> Mood
+Jade --> Condition
+
+Mood --> MoodAgent
+MoodAgent --> MoodCriteria
+
+Condition --> MedicalAgent
+MedicalAgent --> Effects
+MedicalAgent --> Symptoms
+
+Effects --> MedicalCriteria
+
+MoodCriteria --> Audius
+MedicalCriteria --> Audius
+
+Audius --> Filter
+Filter --> Results
+
+Symptoms --> Results : Допълнителна\nинформация
+
+Results --> History
+Results --> Frontend
+
+@enduml

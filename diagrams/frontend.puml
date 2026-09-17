@@ -1,0 +1,182 @@
+@startuml
+
+scale max 850 width
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 5
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam linetype ortho
+
+skinparam nodesep 5
+skinparam ranksep 6
+
+skinparam folder {
+    BackgroundColor #F7F7F7
+    BorderColor black
+}
+
+skinparam file {
+    BackgroundColor white
+    BorderColor black
+}
+
+top to bottom direction
+
+folder "src" as SRC {
+
+    ' ==================================================
+    ' COMPONENTS
+    ' ==================================================
+
+    folder "components" as COMPONENTS {
+
+        folder "dashboard-components" as DASHBOARD {
+            file "playlist.tsx" as Playlist
+            file "session-hero.tsx" as Hero
+            file "session-page.tsx" as Session
+            file "sidebar-app.tsx" as Sidebar
+
+            Playlist -[hidden]right-> Hero
+            Session -[hidden]right-> Sidebar
+            Playlist -[hidden]down-> Session
+            Hero -[hidden]down-> Sidebar
+        }
+
+        folder "custom-components" as CUSTOM {
+            file "filter-bar.tsx" as Filter
+            file "list_item.tsx" as ListItem
+            file "logo.tsx" as Logo
+
+            Filter -[hidden]right-> ListItem
+            ListItem -[hidden]right-> Logo
+        }
+
+        folder "ui\nshadcn/ui components" as UI
+
+        DASHBOARD -[hidden]right-> CUSTOM
+        CUSTOM -[hidden]right-> UI
+    }
+
+
+    ' ==================================================
+    ' APP
+    ' ==================================================
+
+    folder "app" as APP {
+
+        file "layout.tsx" as AppLayout
+        file "page.tsx" as AppPage
+
+        folder "login" as LOGIN {
+            file "page.tsx" as LoginPage
+        }
+
+        folder "player" as PLAYER {
+            file "layout.tsx" as PlayerLayout
+            file "page.tsx" as PlayerPage
+
+            PlayerLayout -[hidden]right-> PlayerPage
+        }
+
+        AppLayout -[hidden]right-> AppPage
+        LOGIN -[hidden]right-> PLAYER
+
+        AppLayout -[hidden]down-> LOGIN
+        AppPage -[hidden]down-> PLAYER
+    }
+
+
+    ' ==================================================
+    ' SERVICES
+    ' ==================================================
+
+    folder "services" as SERVICES {
+
+        file "auth-service.ts" as AuthService
+        file "recommend-service.ts" as RecommendService
+        file "base-http-service.ts" as BaseService
+        file "user-service.ts" as UserService
+
+        AuthService -[hidden]right-> RecommendService
+        BaseService -[hidden]right-> UserService
+
+        AuthService -[hidden]down-> BaseService
+        RecommendService -[hidden]down-> UserService
+    }
+
+
+    ' ==================================================
+    ' TYPE
+    ' ==================================================
+
+    folder "type" as TYPE {
+
+        file "Mood.ts" as Mood
+        file "MedicalCondition.ts" as Condition
+        file "song-recommendation.ts" as SongType
+        file "User.ts" as UserType
+
+        Mood -[hidden]right-> Condition
+        SongType -[hidden]right-> UserType
+
+        Mood -[hidden]down-> SongType
+        Condition -[hidden]down-> UserType
+    }
+
+
+    ' ==================================================
+    ' МАЛКИ ПАПКИ
+    ' ==================================================
+
+    folder "context" as CONTEXT {
+        file "AuthContext.tsx"
+    }
+
+    folder "http" as HTTP {
+        file "http-client.tsx"
+    }
+
+    folder "lib" as LIB {
+        file "firebase.js" as Firebase
+        file "utils.ts" as Utils
+
+        Firebase -[hidden]right-> Utils
+    }
+
+    folder "data / hooks" as AUX {
+        file "history.ts" as History
+        file "menu-elements.ts" as Menu
+        file "use-mobile.ts" as Mobile
+
+        History -[hidden]right-> Menu
+        Menu -[hidden]right-> Mobile
+    }
+
+
+    ' ==================================================
+    ' КОМПАКТНА ПОДРЕДБА В SRC
+    ' ==================================================
+
+    ' Най-големите папки – първи ред
+    COMPONENTS -[hidden]right-> APP
+
+    ' Втори ред
+    SERVICES -[hidden]right-> TYPE
+    TYPE -[hidden]right-> CONTEXT
+
+    ' Трети ред
+    AUX -[hidden]right-> LIB
+    LIB -[hidden]right-> HTTP
+
+    ' Вертикално подравняване
+    COMPONENTS -[hidden]down-> SERVICES
+    APP -[hidden]down-> CONTEXT
+
+    SERVICES -[hidden]down-> AUX
+    TYPE -[hidden]down-> LIB
+    CONTEXT -[hidden]down-> HTTP
+}
+
+@enduml

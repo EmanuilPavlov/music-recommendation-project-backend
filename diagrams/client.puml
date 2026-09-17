@@ -1,0 +1,58 @@
+@startuml
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam linetype ortho
+skinparam defaultFontName Arial
+skinparam defaultFontSize 14
+
+skinparam nodesep 60
+skinparam ranksep 50
+
+skinparam rectangle {
+    BackgroundColor #F7F7F7
+    BorderColor black
+}
+
+skinparam cloud {
+    BackgroundColor white
+    BorderColor black
+}
+
+top to bottom direction
+
+rectangle "Клиентско приложение\nNext.js / React / TypeScript" {
+
+    rectangle "Страници" as Pages
+
+    rectangle "Потребителски интерфейс" as UI
+
+    rectangle "Управление на\nавтентикацията и сесията" as AuthContext
+
+    rectangle "Клиентски услуги" as Services
+
+    rectangle "Услуга за\nавтентикация" as AuthService
+
+    rectangle "HTTP клиент" as HttpClient
+}
+
+cloud "Firebase\nAuthentication" as Firebase
+rectangle "Сървърно REST API" as Backend
+
+Pages -down-> UI
+Pages -right-> AuthContext
+
+UI -down-> Services
+
+AuthContext -down-> AuthService
+AuthContext -right-> Firebase : състояние на\nпотребителя
+
+AuthService -right-> Firebase : вход /\nрегистрация
+
+Services -down-> HttpClient
+AuthService -down-> HttpClient
+
+HttpClient -right-> Backend : REST заявки
+
+@enduml

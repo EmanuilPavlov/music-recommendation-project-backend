@@ -1,0 +1,67 @@
+@startuml
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam linetype ortho
+
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam Padding 15
+
+skinparam nodesep 110
+skinparam ranksep 55
+
+skinparam rectangle {
+    BackgroundColor #F7F7F7
+    BorderColor black
+}
+
+skinparam database {
+    BackgroundColor white
+    BorderColor black
+}
+
+skinparam cloud {
+    BackgroundColor white
+    BorderColor black
+}
+
+top to bottom direction
+
+rectangle "Клиентско приложение" as Client
+
+rectangle "Сървърно приложение\nSpring Boot" as Backend {
+
+    rectangle "Security" as Security
+
+    rectangle "REST Controllers" as Controllers
+
+    rectangle "Service" as Services
+
+    rectangle "Repository" as Repository
+
+    Security -down-> Controllers
+    Controllers -down-> Services
+    Services -down-> Repository
+}
+
+cloud "Firebase\nAuthentication" as Firebase
+
+rectangle "Многоагентна система\nJADE" as Jade
+
+cloud "Audius API" as Audius
+
+database "MySQL" as DB
+
+Client -down--> Security : REST заявки
+
+Security -right-> Firebase : проверка на\nавтентикацията
+
+Services <-right-> Jade : музикални\nпрепоръки
+
+Services -left-> Audius : музикално\nсъдържание
+
+Repository -down--> DB : данни
+
+@enduml

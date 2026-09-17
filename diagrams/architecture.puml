@@ -1,0 +1,92 @@
+@startuml
+
+top to bottom direction
+
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam defaultTextAlignment center
+skinparam linetype ortho
+
+skinparam nodesep 55
+skinparam ranksep 55
+skinparam dpi 200
+
+skinparam ArrowFontSize 13
+skinparam ComponentFontSize 14
+skinparam RectangleFontSize 15
+skinparam DatabaseFontSize 14
+skinparam CloudFontSize 14
+
+
+rectangle "Frontend приложение\nNext.js / React / TypeScript" as Frontend
+
+cloud "Firebase\nAuthentication" as Firebase
+
+
+rectangle "Backend приложение – Spring Boot" as Backend {
+
+    component "Spring Security\nFirebase Admin SDK" as Security
+
+    component "REST API" as Rest
+
+    component "Service слой" as Service
+
+    component "JADE\nмногоагентна система" as Jade
+
+    component "Онтология\nApache Jena" as Ontology
+
+    component "Audius\nинтеграция" as AudiusIntegration
+
+    component "Spring Data JPA\nHibernate" as Persistence
+
+
+    Security -[hidden]right-> Rest
+    Rest -[hidden]right-> Service
+
+    Service -[hidden]down-> Jade
+
+    Persistence -[hidden]left-> Jade
+    Jade -[hidden]right-> AudiusIntegration
+
+    Jade -[hidden]down-> Ontology
+}
+
+
+database "MySQL" as Database
+cloud "Audius API" as Audius
+
+
+' Подреждане
+Firebase -[hidden]right-> Frontend
+Persistence -[hidden]down-> Database
+AudiusIntegration -[hidden]down-> Audius
+
+
+' Автентикация
+Frontend ----> Firebase : Автентикация
+Frontend --> Security : REST заявки\nBearer token
+
+Security ---> Firebase : Проверка на token
+Security --> Rest : Разрешена заявка
+
+
+' Основна обработка
+Rest --> Service : Обработка
+Service --> Jade : Заявка за препоръка
+
+
+' Онтология
+Jade --> Ontology : Извличане на знания
+
+
+' Музикални данни
+Jade --> AudiusIntegration : Търсене на песни
+AudiusIntegration ---> Audius : HTTP заявки
+
+
+' Релационни данни
+Service ---> Persistence : Потребителски данни\nи история
+Persistence ---> Database : Запис / извличане
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam defaultFontSize 14
+
+skinparam rectangle {
+    BackgroundColor #F7F7F7
+    BorderColor black
+}
+
+left to right direction
+
+rectangle "Сървърна част" as Server
+
+rectangle "JADE Container" {
+
+    rectangle "BridgeAgent" as Bridge
+
+    rectangle "MoodAgent" as Mood
+
+    rectangle "MedicalConditionAgent" as Medical
+
+    Bridge <--> Mood
+    Bridge <--> Medical
+}
+
+Server <--> Bridge : заявка / резултат
+
+@enduml

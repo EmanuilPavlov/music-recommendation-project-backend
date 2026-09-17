@@ -1,0 +1,83 @@
+@startuml
+
+left to right direction
+
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam defaultTextAlignment center
+skinparam linetype ortho
+
+skinparam nodesep 55
+skinparam ranksep 55
+skinparam dpi 200
+
+skinparam ArrowFontSize 13
+skinparam ActorFontSize 14
+skinparam UsecaseFontSize 14
+skinparam RectangleFontSize 15
+
+
+actor "Потребител" as User
+
+
+rectangle "Система за препоръка на музика" {
+
+    ' Основни случаи на употреба
+    usecase "Вход в системата" as Login
+
+    usecase "Получаване на\nмузикална препоръка" as Recommendation
+
+    usecase "Преглед на историята\nна търсенията" as History
+
+    usecase "Изход от системата" as Logout
+
+
+    ' Конкретни начини за вход
+    usecase "Вход с e-mail\nи парола" as EmailLogin
+
+    usecase "Вход с Google" as GoogleLogin
+
+
+    ' Конкретни видове препоръки
+    usecase "Препоръка според\nнастроение" as MoodRec
+
+    usecase "Препоръка според\nмедицинско състояние" as MedicalRec
+
+    usecase "Определяне на брой\nрезултати" as Limit
+
+
+    ' Подреждане като в класическа Use Case диаграма
+    Login -[hidden]down-> Recommendation
+    Recommendation -[hidden]down-> History
+    History -[hidden]down-> Logout
+
+    EmailLogin -[hidden]down-> GoogleLogin
+
+    MoodRec -[hidden]down-> MedicalRec
+    MedicalRec -[hidden]down-> Limit
+
+    Login -[hidden]right-> EmailLogin
+    Recommendation -[hidden]right-> MoodRec
+
+
+    ' Generalization
+    EmailLogin -|> Login
+    GoogleLogin -|> Login
+
+    MoodRec -|> Recommendation
+    MedicalRec -|> Recommendation
+
+
+    ' Задължителна обща част
+    MoodRec ..> Limit : <<include>>
+    MedicalRec ..> Limit : <<include>>
+}
+
+
+' Асоциации с актьора
+User -- Login
+User -- Recommendation
+User -- History
+User -- Logout
+
+@enduml
